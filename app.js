@@ -15,6 +15,9 @@ const scrapeHTML = (html) => {
     let newJSON = {};
 }
 
+const captilizeAuth = (authStr) => authStr.split('+').map(name => name.slice(0, 1).toUpperCase() + name.slice(1, name.length)).join(" ").trim();
+
+
 
 app.get('/tag/:tag', function (req, res, next) {
     fetch(`https://www.goodreads.com/quotes/tag/${req.params.tag}`)
@@ -43,7 +46,6 @@ app.get('/tag/:tag', function (req, res, next) {
 });
 
 app.get('/author/:name', (req, res, next)=>{
-    // console.log(req.params.name);
     fetch(`https://www.goodreads.com/search?q=${req.params.name}&search[source]=goodreads&search_type=quotes&tab=quotes`)
     .then(response => response.text())
     .then(body => {
@@ -54,15 +56,21 @@ app.get('/author/:name', (req, res, next)=>{
         });
         let allQuotes = [];
         $('.quoteText').each((i, el) => {
-            let searchAuthor = req.params.name.split("+").join(" ");
+            let searchAuthor = captilizeAuth(req.params.name);
+            console.log(`\n${searchAuthor}`);
             let quoteAuthor = "";
             let quotePublication = "";
             for (let j = 0; j < el.children.length; j++) {
-                if (el.children[j].name === 'a'){ 
+                if (el.children[j].name === 'a' && el.children[j].children[0].data === searchAuthor){ 
+                    console.log(`\n\n\ author only\n\n`);
                     quoteAuthor = el.children[j].children[0].data;
                 }
+                else if (el.children[j].name === 'a' && el.children[j].children[0].data !== searchAuthor){ 
+                    console.log(`\n\n\ with publication \n\n`);
+                    quotePublication = el.children[j].children[0].data;
+                    quoteAuthor = searchAuthor;
+                }
             }
-            console.log(quoteAuthor.toLowerCase());
             let newQuote = {
                 quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, '').replace(/"/, '').replace(/\"/g, ''),
                 author: quoteAuthor
@@ -82,6 +90,7 @@ console.log('Magic happens on port 8081');
 exports = module.exports = app;
 
 
+// searchAuthor
 
 // if (el.children[j].name === 'a' && el.children[j].children[0].data.toLowerCase() === searchAuthor) {
 //     quoteAuthor = el.children[j].children[0].data;
