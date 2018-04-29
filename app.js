@@ -57,9 +57,9 @@ app.get('/author/:name', (req, res, next)=>{
         let allQuotes = [];
         $('.quoteText').each((i, el) => {
             let searchAuthor = captilizeAuth(req.params.name);
-            console.log(`\n${searchAuthor}`);
             let quoteAuthor = "";
             let quotePublication = "";
+            let newQuote = {};
             for (let j = 0; j < el.children.length; j++) {
                 if (el.children[j].name === 'a' && el.children[j].children[0].data === searchAuthor){ 
                     console.log(`\n\n\ author only\n\n`);
@@ -71,10 +71,18 @@ app.get('/author/:name', (req, res, next)=>{
                     quoteAuthor = searchAuthor;
                 }
             }
-            let newQuote = {
-                quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, '').replace(/"/, '').replace(/\"/g, ''),
-                author: quoteAuthor
-            };
+            if (quotePublication){
+                newQuote = {
+                    quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, '').replace(/"/, '').replace(/\"/g, ''),
+                    author: quoteAuthor,
+                    publication: quotePublication
+                };
+            } else {
+                newQuote = {
+                    quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, '').replace(/"/, '').replace(/\"/g, ''),
+                    author: quoteAuthor
+                };
+            }
             allQuotes.push(newQuote);
         });
         res.status(200).json(allQuotes);
