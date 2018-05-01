@@ -23,11 +23,16 @@ app.get('/tag/:tag', function (req, res, next) {
     fetch(`https://www.goodreads.com/quotes/tag/${req.params.tag}`)
     .then(response => response.text())
     .then(body => {
-        scrapeHTML(body);
+        // scrapeHTML(body);
         let $ = cheerio.load(body, {
             normalizeWhitespace: true,
             xmlMode: false
         });
+
+        let pageNumArr = $('.next_page')[0].parent.children
+
+        console.log(pageNumArr[pageNumArr.length-3].children[0].data);
+
         let allQuotes = [];
         $('.quoteText').each((i, el) => {
             let quoteAuthor = "";
@@ -55,6 +60,7 @@ app.get('/author/:name', (req, res, next)=>{
             xmlMode: false
         });
         let allQuotes = [];
+        
         $('.quoteText').each((i, el) => {
             let searchAuthor = captilizeAuth(req.params.name);
             let quoteAuthor = "";
@@ -62,11 +68,9 @@ app.get('/author/:name', (req, res, next)=>{
             let newQuote = {};
             for (let j = 0; j < el.children.length; j++) {
                 if (el.children[j].name === 'a' && el.children[j].children[0].data === searchAuthor){ 
-                    console.log(`\n\n\ author only\n\n`);
                     quoteAuthor = el.children[j].children[0].data;
                 }
                 else if (el.children[j].name === 'a' && el.children[j].children[0].data !== searchAuthor){ 
-                    console.log(`\n\n\ with publication \n\n`);
                     quotePublication = el.children[j].children[0].data;
                     quoteAuthor = searchAuthor;
                 }
@@ -96,14 +100,3 @@ app.listen('8081')
 console.log('Magic happens on port 8081');
 
 exports = module.exports = app;
-
-
-// searchAuthor
-
-// if (el.children[j].name === 'a' && el.children[j].children[0].data.toLowerCase() === searchAuthor) {
-//     quoteAuthor = el.children[j].children[0].data;
-// }
-// else if (el.children[j].name === 'a' && el.children[j].children[0].data.toLowerCase() !== searchAuthor) {
-//     quotePublication = el.children[j].children[0].data;
-//     quoteAuthor = el.children[j].children[1].data;
-// }
