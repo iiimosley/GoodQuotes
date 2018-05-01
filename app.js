@@ -28,11 +28,9 @@ app.get('/tag/:tag', function (req, res, next) {
             normalizeWhitespace: true,
             xmlMode: false
         });
-
+        let quoteData = {};
         let pageNumArr = $('.next_page')[0].parent.children
-
-        console.log(pageNumArr[pageNumArr.length-3].children[0].data);
-
+        quoteData.total_pages = pageNumArr[pageNumArr.length-3].children[0].data;
         let allQuotes = [];
         $('.quoteText').each((i, el) => {
             let quoteAuthor = "";
@@ -45,7 +43,8 @@ app.get('/tag/:tag', function (req, res, next) {
             };
             allQuotes.push(newQuote);
         });
-        res.status(200).json(allQuotes);
+        quoteData.quotes = allQuotes;
+        res.status(200).json(quoteData);
     })
     .catch(err=>res.status(500).json(err));
 });
@@ -59,8 +58,12 @@ app.get('/author/:name', (req, res, next)=>{
             normalizeWhitespace: true,
             xmlMode: false
         });
+
+        let quoteData = {};
+        let pageNumArr = $('.next_page')[0].parent.children
+        quoteData.total_pages = pageNumArr[pageNumArr.length - 3].children[0].data;
         let allQuotes = [];
-        
+
         $('.quoteText').each((i, el) => {
             let searchAuthor = captilizeAuth(req.params.name);
             let quoteAuthor = "";
@@ -89,7 +92,8 @@ app.get('/author/:name', (req, res, next)=>{
             }
             allQuotes.push(newQuote);
         });
-        res.status(200).json(allQuotes);
+        quoteData.quotes = allQuotes;
+        res.status(200).json(quoteData);
     })
     .catch(err => res.status(500).json(err));
 })
