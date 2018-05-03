@@ -3,6 +3,8 @@
 const { Router } = require('express');
 const router = Router();
 
-const {} = require('../controllers/authorCtrl');
+const {getAuthorQuotes} = require('../controllers/authorCtrl');
+
+router.get('/author/:name', getAuthorQuotes);
 
 module.exports = router;
