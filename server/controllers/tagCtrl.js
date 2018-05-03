@@ -20,7 +20,7 @@ module.exports.getTagQuotes = (req, res, next) => {
         if (el.children[j].name === 'a') quoteAuthor = el.children[j].children[0].data;
       }
       let newQuote = {
-        quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, ''),
+        quote: el.children[0].data.trim().replace(/“”/g, ''),
         author: quoteAuthor
       };
       allQuotes.push(newQuote);

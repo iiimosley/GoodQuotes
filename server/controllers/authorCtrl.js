@@ -34,13 +34,15 @@ module.exports.getAuthorQuotes = (req,res,next) => {
       }
       if (quotePublication) {
         newQuote = {
-          quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, '').replace(/"/, '').replace(/\"/g, ''),
+          // quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, '').replace(/"/, '').replace(/\"/g, ''),
+          quote: el.children[0].data.trim().replace(/[“”"\"]/g, ''),
           author: quoteAuthor,
           publication: quotePublication
         };
       } else {
         newQuote = {
-          quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, '').replace(/"/, '').replace(/\"/g, ''),
+          // quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, '').replace(/"/, '').replace(/\"/g, ''),
+          quote: el.children[0].data.trim().replace(/[“”"\"]/g, ''),
           author: quoteAuthor
         };
       }
