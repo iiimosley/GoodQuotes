@@ -19,31 +19,16 @@ module.exports.getTitleQuotes = (req, res, next) => {
     let allQuotes = [];
 
     $('.quoteText').each((i, el) => {
-      let searchAuthor = captilizeAuth(req.params.title);
-      let quoteAuthor = "";
-      let quotePublication = "";
+      let thisObj = $(el).find('.authorOrTitle');
+
       let newQuote = {};
-      for (let j = 0; j < el.children.length; j++) {
-        if (el.children[j].title === 'a' && el.children[j].children[0].data === searchAuthor) {
-          quoteAuthor = el.children[j].children[0].data;
-        }
-        else if (el.children[j].title === 'a' && el.children[j].children[0].data !== searchAuthor) {
-          quotePublication = el.children[j].children[0].data;
-          quoteAuthor = searchAuthor;
-        }
-      }
-      if (quotePublication) {
-        newQuote = {
-          quote: el.children[0].data.trim().replace(/[“”"\"]/g, ''),
-          author: quoteAuthor,
-          publication: quotePublication
-        };
-      } else {
-        newQuote = {
-          quote: el.children[0].data.trim().replace(/[“”"\"]/g, ''),
-          author: quoteAuthor
-        };
-      }
+
+      newQuote = {
+        quote: el.children[0].data.trim().replace(/[“”"\"]/g, ''),
+        author: $(el).find('.authorOrTitle')[0].children[0].data,
+        publication: $(el).find('.authorOrTitle')[1].children[0].data
+      };
+      
       allQuotes.push(newQuote);
     });
     quoteData.quotes = allQuotes;

@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 module.exports.getQuotesByTag = (tag) => {
   return fetch(`https://www.goodreads.com/quotes/tag/${tag}`)
-    .then(response => response.text());
+  .then(response => response.text());
 }
 
 module.exports.getQuotesByAuthor = (name) => {
@@ -13,6 +13,6 @@ module.exports.getQuotesByAuthor = (name) => {
 }
 
 module.exports.getQuotesByTitle = (title) => {
-  return fetch(`https://www.goodreads.com/search?q=${title}&search[source]=goodreads&search_type=quotes&tab=quotes`)
+  return fetch(`https://www.goodreads.com/search?q=${title}&search_type=quotes&search%5Bfield%5D=title`)
   .then(response => response.text());
 }
