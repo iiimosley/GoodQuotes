@@ -3,6 +3,8 @@
 const { Router } = require('express');
 const router = Router();
 
-const { } = require('../controllers/titleCtrl');
+const { getTitleQuotes } = require('../controllers/titleCtrl');
+
+router.get('/title/:title', getTitleQuotes);
 
 module.exports = router;

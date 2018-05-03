@@ -9,5 +9,10 @@ module.exports.getQuotesByTag = (tag) => {
 
 module.exports.getQuotesByAuthor = (name) => {
   return fetch(`https://www.goodreads.com/search?q=${name}&search[source]=goodreads&search_type=quotes&tab=quotes`)
-  .then(response => response.text())
+  .then(response => response.text());
+}
+
+module.exports.getQuotesByTitle = (title) => {
+  return fetch(`https://www.goodreads.com/search?q=${title}&search[source]=goodreads&search_type=quotes&tab=quotes`)
+  .then(response => response.text());
 }

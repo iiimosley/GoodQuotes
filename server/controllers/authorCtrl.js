@@ -1,7 +1,7 @@
 'use strict';
 
 const cheerio = require('cheerio');
-const {getQuotesByAuthor} = require('../models/QuoteScrape');
+const { getQuotesByAuthor } = require('../models/QuoteScrape');
 
 const captilizeAuth = (authStr) => authStr.split('+').map(name => name.slice(0, 1).toUpperCase() + name.slice(1, name.length)).join(" ").trim();
 
@@ -34,14 +34,12 @@ module.exports.getAuthorQuotes = (req,res,next) => {
       }
       if (quotePublication) {
         newQuote = {
-          // quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, '').replace(/"/, '').replace(/\"/g, ''),
           quote: el.children[0].data.trim().replace(/[“”"\"]/g, ''),
           author: quoteAuthor,
           publication: quotePublication
         };
       } else {
         newQuote = {
-          // quote: el.children[0].data.trim().replace(/“/, '').replace(/”/, '').replace(/"/, '').replace(/\"/g, ''),
           quote: el.children[0].data.trim().replace(/[“”"\"]/g, ''),
           author: quoteAuthor
         };
