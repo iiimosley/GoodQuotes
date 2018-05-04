@@ -20,21 +20,11 @@ module.exports.getAuthorQuotes = (req,res,next) => {
     quoteData.quotes = [];
 
     $('.quoteText').each((i, el) => {
-      let newQuote = {};
-      if ($(el).find('.authorOrTitle').length < 2) {
-        newQuote = {
-          quote: $(el).text().split('—')[0].trim().replace(/[“”"\"]/g, ''),
-          author: $(el).find('.authorOrTitle')[0].children[0].data,
-          publication: null,
-        };
-      } else {
-        newQuote = {
-          quote: $(el).text().split('—')[0].trim().replace(/[“”"\"]/g, ''),
-          author: $(el).find('.authorOrTitle')[0].children[0].data,
-          publication: $(el).find('.authorOrTitle')[1].children[0].data,
-        };
-      }
-      quoteData.quotes.push(newQuote);
+      quoteData.quotes.push({
+        quote: $(el).text().split('—')[0].trim().replace(/[“”"\"]/g, ''),
+        author: $(el).find('.authorOrTitle')[0].children[0].data,
+        publication: $(el).find('.authorOrTitle').length < 2 ? null : $(el).find('.authorOrTitle')[1].children[0].data,
+      });
     });
     res.status(200).json(quoteData);
   })
