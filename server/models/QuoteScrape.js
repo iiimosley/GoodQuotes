@@ -2,6 +2,13 @@
 
 const fetch = require('node-fetch');
 
+
+const hasQuery = q => isNaN(q) ? "" : `page=${q}&`;
+
+const queryExtension = (p, q, str) => isNaN(q) ? `https://www.goodreads.com/search?q=${p}&search_type=quotes&search%5Bfield%5D=${str}`
+: `https://www.goodreads.com/search?page=${q}&q=${p}&search%5Bfield%5D=${str}&search%5Bsource%5D=goodreads&search_type=quotes&tab=quotes`;
+
+
 module.exports.getQuotesByTag = (tag) => {
   return fetch(`https://www.goodreads.com/quotes/tag/${tag}`)
   .then(response => response.text());
@@ -12,7 +19,8 @@ module.exports.getQuotesByAuthor = (name) => {
   .then(response => response.text());
 }
 
-module.exports.getQuotesByTitle = (title) => {
-  return fetch(`https://www.goodreads.com/search?q=${title}&search_type=quotes&search%5Bfield%5D=title`)
+module.exports.getQuotesByTitle = (title, query) => {
+  console.log(queryExtension(title, query, "title"));
+  return fetch(`${queryExtension(title, query, "title")}`)
   .then(response => response.text());
 }

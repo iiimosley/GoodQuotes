@@ -6,7 +6,7 @@ const { getQuotesByTitle } = require('../models/QuoteScrape');
 const captilizeAuth = (authStr) => authStr.split('+').map(name => name.slice(0, 1).toUpperCase() + name.slice(1, name.length)).join(" ").trim();
 
 module.exports.getTitleQuotes = (req, res, next) => {
-  getQuotesByTitle (req.params.title)
+  getQuotesByTitle(req.params.title, req.query.page)
   .then(body => {
     let $ = cheerio.load(body, {
       normalizeWhitespace: true,
@@ -19,16 +19,25 @@ module.exports.getTitleQuotes = (req, res, next) => {
     let allQuotes = [];
 
     $('.quoteText').each((i, el) => {
-      let thisObj = $(el).find('.authorOrTitle');
+
 
       let newQuote = {};
 
-      newQuote = {
-        quote: el.children[0].data.trim().replace(/[“”"\"]/g, ''),
-        author: $(el).find('.authorOrTitle')[0].children[0].data,
-        publication: $(el).find('.authorOrTitle')[1].children[0].data
-      };
-      
+      console.log('\n\n' + $(el).find('.authorOrTitle').length + '\n\n');
+
+      if ($(el).find('.authorOrTitle').length<2){
+        newQuote = {
+          quote: el.children[0].data.trim().replace(/[“”"\"]/g, ''),
+          author: $(el).find('.authorOrTitle')[0].children[0].data,
+          publication: null,
+        };
+      } else {
+        newQuote = {
+          quote: el.children[0].data.trim().replace(/[“”"\"]/g, ''),
+          author: $(el).find('.authorOrTitle')[0].children[0].data,
+          publication: $(el).find('.authorOrTitle')[1].children[0].data,
+        };
+      }
       allQuotes.push(newQuote);
     });
     quoteData.quotes = allQuotes;
