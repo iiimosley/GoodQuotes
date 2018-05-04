@@ -5,6 +5,7 @@ const { getQuotesByTitle } = require('../models/QuoteScrape');
 
 const captilizeAuth = (authStr) => authStr.split('+').map(name => name.slice(0, 1).toUpperCase() + name.slice(1, name.length)).join(" ").trim();
 
+
 module.exports.getTitleQuotes = (req, res, next) => {
   getQuotesByTitle(req.params.title, req.query.page)
   .then(body => {
@@ -20,10 +21,7 @@ module.exports.getTitleQuotes = (req, res, next) => {
 
     $('.quoteText').each((i, el) => {
 
-
       let newQuote = {};
-
-      console.log('\n\n' + $(el).find('.authorOrTitle').length + '\n\n');
 
       if ($(el).find('.authorOrTitle').length<2){
         newQuote = {
