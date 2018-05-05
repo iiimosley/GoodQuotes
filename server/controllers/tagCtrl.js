@@ -16,12 +16,11 @@ module.exports.getTagQuotes = (req, res, next) => {
     quoteData.total_pages = +pageNumArr[pageNumArr.length - 3].children[0].data;
     quoteData.quotes = [];
     $('.quoteText').each((i, el) => {
-      let newQuote = {
+      quoteData.quotes.push({
         quote: $(el).text().split('―')[0].trim().replace(/[“”"\"]/g, '').replace(/\s\s+/g, ' '),
         author: $(el).find('.authorOrTitle')[0].children[0].data,
-        publication: (el).find('.authorOrTitle').length < 2 ? null : $(el).find('.authorOrTitle')[1].children[0].data,
-      };
-      quoteData.quotes.push(newQuote);
+        publication: $(el).find('.authorOrTitle').length < 2 ? null : $(el).find('.authorOrTitle')[1].children[0].data,
+      });
     });
     res.status(200).json(quoteData);
   })

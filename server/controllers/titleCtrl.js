@@ -21,6 +21,7 @@ module.exports.getTitleQuotes = (req, res, next) => {
     quoteData.quotes = [];
 
     $('.quoteText').each((i, el) => {
+      // console.log('\n\n',$(el).find('.authorOrTitle'))
       quoteData.quotes.push({
         quote: $(el).text().split('—')[0].trim().replace(/[“”"\"]/g, ''),
         author: $(el).find('.authorOrTitle')[0].children[0].data,

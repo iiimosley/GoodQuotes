@@ -21,7 +21,6 @@ module.exports.getQuotesByAuthor = (name, query) => {
 }
 
 module.exports.getQuotesByTitle = (title, query) => {
-  console.log(queryExtension(title, query, "title"));
   return fetch(`${queryExtension(title, query, "title")}`)
   .then(response => response.text());
 }
