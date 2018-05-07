@@ -15,7 +15,6 @@ module.exports.getQuotesByTag = (tag) => {
 }
 
 module.exports.getQuotesByAuthor = (name, query) => {
-  // return fetch(`https://www.goodreads.com/search?q=${name}&search[source]=goodreads&search_type=quotes&tab=quotes`)
   return fetch(`${queryExtension(name, query, "author")}`)
   .then(response => response.text());
 }
