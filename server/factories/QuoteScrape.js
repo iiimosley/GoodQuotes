@@ -2,7 +2,6 @@
 
 const fetch = require('node-fetch');
 
-
 const hasQuery = q => isNaN(q) ? "" : `page=${q}&`;
 
 const queryExtension = (p, q, str) => isNaN(q) ? `https://www.goodreads.com/search?q=${p}&search_type=quotes&search%5Bfield%5D=${str}`

@@ -1,7 +1,7 @@
 'use strict';
 
 const cheerio = require('cheerio');
-const {getQuotesByTag} = require('../models/QuoteScrape');
+const {getQuotesByTag} = require('../factories/QuoteScrape');
 
 module.exports.getTagQuotes = (req, res, next) => {
   getQuotesByTag(req.params.tag)

@@ -1,7 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var User_Quote = sequelize.define('User_Quote', {
-    line_id: DataTypes.INTEGER
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    }
   }, { tableName: "user_quotes", timestamps: false });
   User_Quote.associate = function(models) {
     User_Quote.belongsTo(models.User, {

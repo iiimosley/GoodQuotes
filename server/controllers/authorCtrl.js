@@ -1,7 +1,7 @@
 'use strict';
 
 const cheerio = require('cheerio');
-const { getQuotesByAuthor } = require('../models/QuoteScrape');
+const { getQuotesByAuthor } = require('../factories/QuoteScrape');
 
 const captilizeAuth = (authStr) => authStr.split('+').map(name => name.slice(0, 1).toUpperCase() + name.slice(1, name.length)).join(" ").trim();
 
