@@ -1,7 +1,7 @@
 'use strict';
 
 const cheerio = require('cheerio');
-const {getQuotesByTag} = require('../models/QuoteScrape');
+const {getQuotesByTag} = require('../factories/QuoteScrape');
 
 module.exports.getTagQuotes = (req, res, next) => {
   getQuotesByTag(req.params.tag)
@@ -12,20 +12,16 @@ module.exports.getTagQuotes = (req, res, next) => {
     });
     let quoteData = {};
     let pageNumArr = $('.next_page')[0].parent.children
-    quoteData.total_pages = pageNumArr[pageNumArr.length - 3].children[0].data;
-    let allQuotes = [];
+    quoteData.current_page = !req.query.page ? 1 : +req.query.page;
+    quoteData.total_pages = +pageNumArr[pageNumArr.length - 3].children[0].data;
+    quoteData.quotes = [];
     $('.quoteText').each((i, el) => {
-      let quoteAuthor = "";
-      for (let j = 0; j < el.children.length; j++) {
-        if (el.children[j].name === 'a') quoteAuthor = el.children[j].children[0].data;
-      }
-      let newQuote = {
-        quote: el.children[0].data.trim().replace(/“”/g, ''),
-        author: quoteAuthor
-      };
-      allQuotes.push(newQuote);
+      quoteData.quotes.push({
+        quote: $(el).text().split('―')[0].trim().replace(/[“”"\"]/g, '').replace(/\s\s+/g, ' '),
+        author: $(el).find('.authorOrTitle')[0].children[0].data,
+        publication: $(el).find('.authorOrTitle').length < 2 ? null : $(el).find('.authorOrTitle')[1].children[0].data,
+      });
     });
-    quoteData.quotes = allQuotes;
     res.status(200).json(quoteData);
   })
   .catch(err => res.status(500).json(err));

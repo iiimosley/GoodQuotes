@@ -1,0 +1,17 @@
+{
+  "development": {
+    "database": "goodquotes",
+    "host": "127.0.0.1",
+    "dialect": "postgresql"
+  },
+  "test": {
+    "database": "goodquotes",
+    "host": "127.0.0.1",
+    "dialect": "postgresql"
+  },
+  "production": {
+    "database": "goodquotes",
+    "host": "127.0.0.1",
+    "dialect": "postgresql"
+  }
+}
