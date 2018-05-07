@@ -6,7 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING
   }, { tableName: "users", timestamps: false });
   User.associate = function(models) {
-    // associations can be defined here
+    User.hasMany(models.User_Quote, {
+      foreignKey: 'user_id'
+    }),
+    User.hasMany(models.User_Tag, {
+      foreignKey: 'user_id'
+    });
   };
   return User;
 };

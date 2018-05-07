@@ -1,10 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Quote = sequelize.define('Quote', {
-    quote: DataTypes.STRING
+    quote_text: DataTypes.STRING,
+    author: DataTypes.STRING
   }, { tableName: "quotes", timestamps: false });
   Quote.associate = function(models) {
-    // associations can be defined here
+    Quote.hasMany(models.User_Quote, {
+      foreignKey: 'quote_id'
+    })
   };
   return Quote;
 };

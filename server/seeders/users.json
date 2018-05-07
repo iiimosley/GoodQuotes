@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "username": "bobsmith",
+      "email": "bob@smith.com",
+      "password": "$2a$08$eKaLPVy9RcKS01.XUayCn.x9nhBn7B1zx1AOoO0bFjakSBwwcLJoO"
+    },
+    {
+      "username": "the_dude",
+      "email": "a@a.com",
+      "password": "$2a$08$eKaLPVy9RcKS01.XUayCn.x9nhBn7B1zx1AOoO0bFjakSBwwcLJoO"
+    }
+  ]
+}

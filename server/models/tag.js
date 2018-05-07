@@ -1,10 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Tag = sequelize.define('Tag', {
-    tag_name: DataTypes.STRING
+    tag_content: DataTypes.STRING
   }, { tableName: "tags", timestamps: false });
   Tag.associate = function(models) {
-    // associations can be defined here
+    Tag.hasMany(models.User_Tag, {
+      foreignKey: 'tag_id'
+    })
   };
   return Tag;
 };
