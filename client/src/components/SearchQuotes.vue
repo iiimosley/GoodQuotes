@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'SearchQuotes',
   data() {
     return {
       searchMsg: 'Search for a quote',

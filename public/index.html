@@ -12,7 +12,7 @@
             <button @click="toggle">Click to Show/Hide</button>
             <pizza v-if="isShown" :stuff="message"></pizza>
             <ul>
-                <lie is='quoteTemplate' v-for="quote in quotes" :statement="quote"></li>
+                <li is='quoteTemplate' v-for="quote in quotes" :statement="quote"></li>
             </ul>
         </div>
     </div>
