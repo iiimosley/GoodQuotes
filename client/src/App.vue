@@ -23,4 +23,7 @@ export default {
 h3 {
   text-align: center
 }
+.mainWrap {
+  margin: 1em auto;
+}
 </style>
