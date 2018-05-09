@@ -46,5 +46,4 @@ export default {
 p:nth-child(2) {
   text-align: right;
 }
-
 </style>

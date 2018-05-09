@@ -7,7 +7,11 @@
       <input type="radio" :value="btn" v-model="checked" />
       <label for="btn">{{btn}}</label>
     </span>
+    <p v-if="!radioSelected">Please select a search category</p>
   </div>
+  </div>
+  <div v-if="searchReturn">
+
   </div>
 </div>
 </template>
@@ -21,6 +25,8 @@ export default {
       searchMsg: 'Search for a quote',
       searchBtn: ['tag','author','title'],
       checked: '',
+      radioSelected: true,
+      searchReturn: false
     }
   },
   methods: {
@@ -28,13 +34,15 @@ export default {
       console.log(this);
     },
     searchQuote() {
-      if (this.checked) ? 
-      axios.get(`http://localhost:8081/${this.checked}/${this.searchContent}}`)
+      if (this.checked) {
+        axios.get(`http://localhost:8081/${this.checked}/${this.searchContent}}`)
         .then((res) => {
-
+          
         })
         .catch(e => this.errors.push(e));
-      : console.log('noooope')
+       } else { 
+         this.radioSelected = false;
+       }
     }
   }
 };
@@ -68,6 +76,10 @@ export default {
   justify-content: space-between;
   max-width: 70%;
   margin: auto
+}
+
+#searchSelect>p{
+  color: red;
 }
 
 </style>

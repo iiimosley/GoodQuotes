@@ -1,0 +1,33 @@
+<template>
+<div class='quote'>
+  <p>{{quote}}</p>
+  <p> -- {{author}} <span>{{title}}</span></p>
+</div>
+</template>
+
+<script> 
+
+export default {
+  name: 'Quote',
+  data() {
+    return {
+      quote: '',
+      author: '',
+      title: ''
+    };
+  },  
+}
+
+</script>
+
+<style scoped>
+
+.quote{
+  width: 50%;
+  margin: 2em auto;
+}
+p:nth-child(2) {
+  text-align: right;
+}
+
+</style>
