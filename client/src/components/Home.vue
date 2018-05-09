@@ -1,16 +1,15 @@
 <template>
 <div  v-if="!loading">
   <h3>{{msg}}</h3>
-  <div id='quote'>
-    <p>{{quote.quote}}</p>
-    <p> -- {{quote.author}} <span>{{quote.title}}</span></p>
-  </div>
+  <Quote :quote="quote.quote" :author="quote.author" :title="quote.title"/>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
 import randNum from '../services/randomNum';
+import Quote from './partials/Quote';
+
 
 export default {
   name: 'Home',
@@ -22,6 +21,7 @@ export default {
       quote: null,
     };
   },
+  components: {Quote},
   created() {
     this.getQuote();
   },
@@ -46,5 +46,4 @@ export default {
 p:nth-child(2) {
   text-align: right;
 }
-
 </style>

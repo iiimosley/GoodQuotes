@@ -25,16 +25,12 @@ export default {
         text: 'SearchQuote',
       },
       {
-        url: '#/user/quotes',
-        text: 'YourQuotes',
-      },
-      {
         url: '#/smartquote',
         text: 'SmartQuote',
       },
       {
-        url: '#/logout',
-        text: 'Logout',
+        url: '#/developer',
+        text: 'Developer',
       },
       ],
     };
