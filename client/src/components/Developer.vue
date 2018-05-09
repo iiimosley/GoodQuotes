@@ -1,9 +1,14 @@
 <template>
 <div class="mainWrap">
   <h3>{{welcome}}</h3>
-  <div v-for="(pre, i) in preface" :key="i">
+  <div v-for="(pre, i) in preface" :key="`preface${i}`">
     <p v-html="pre.statement"></p>
     <p>Example: <span class="query">{{pre.example}}</span></p>
+  </div>
+  <div v-for="(query, i) in queries" :key="`query${i}`">
+    <h3>{{query.brief}}</h3>
+    <p>Query <span class="query">{{query.url}}</span></p>
+    <p>Example: <span class="query">{{query.egs}}</span></p>
   </div>
 </div>
 </template>
@@ -28,17 +33,17 @@ export default {
         ],
       queries: [
         {
-          brief: 'Search by tag',
+          brief: 'Search by Tag',
           url: '/tag/...',
           egs: '/tag/wisdom'
         },
         {
-          brief: 'Search by author',
+          brief: 'Search by Author',
           url: '/author/...',
           egs: '/author/tom+robbins'
         },
         {
-          brief: 'Search by title',
+          brief: 'Search by Title',
           url: '/title/...',
           egs: '/title/crime+and+punishment'
         }

@@ -1,17 +1,18 @@
 <template>
 <div>
   <div id="searchContainer">
+    <div id="searchSelect">
+      <span v-for="(btn,i) in searchBtn" :key="`radio${i}`">
+        <input type="radio" :value="btn" v-model="checked" @click="toggleSearch()"/>
+        <label for="btn">{{btn}}</label>
+      </span>
+    </div>
     <input id="searchbar" type="text" :placeholder="searchMsg" v-model="searchContent" @keyup.enter="searchQuote()"/>
-  <div id="searchSelect">
-    <span v-for="(btn,i) in searchBtn" :key="`radio${i}`">
-      <input type="radio" :value="btn" v-model="checked" @click="toggleSearch()"/>
-      <label for="btn">{{btn}}</label>
-    </span>
     <p v-if="!radioSelected">Please select a search category</p>
-  </div>
   </div>
   <div v-if="searchReturn">
     <Quote v-for="(qu, i) in quotes" :key="i" :quote="qu.quote" :author="qu.author" :title="qu.publication" ></Quote>
+    <section>{{quoteData.$data}}</section>
   </div>
 </div>
 </template>
@@ -30,7 +31,8 @@ export default {
       checked: '',
       radioSelected: true,
       searchReturn: false,
-      quotes: []
+      quotes: [],
+      quoteData: ''
     }
   },
   components: {Quote},
@@ -40,11 +42,11 @@ export default {
     },
     searchQuote() {
       if (this.checked) {
-        axios.get(`http://localhost:8081/${this.checked}/${this.searchContent}}`)
+        let searchField = this.searchContent.toLowerCase().replace(/\s/g, '+');
+        axios.get(`http://localhost:8081/${this.checked}/${searchField}}`)
         .then((res) => {
           this.quotes = res.data.quotes;
-          console.log(this.quotes);
-          // this.radioSelected = true;
+          this.quoteData = res.data;
           this.searchReturn = true;
         })
         .catch(e => this.errors.push(e));
@@ -86,8 +88,9 @@ export default {
   margin: auto
 }
 
-#searchSelect>p{
+#searchContainer>p{
   color: red;
+  text-align: center
 }
 
 </style>

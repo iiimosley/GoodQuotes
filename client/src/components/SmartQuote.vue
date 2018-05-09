@@ -7,7 +7,6 @@
 
 <script>
 import axios from 'axios';
-import randNum from '../services/randomNum';
 
 export default {
   name: 'Home',
@@ -15,16 +14,6 @@ export default {
     return {
       msg: "SmartQuote"
     };
-  },
-  methods: {
-    getQuote: function() {
-      axios.get(`http://localhost:8081/tag/${this.tags[randNum(this.tags.length)]}`)
-        .then((res) => {
-          this.quote = res.data.quotes[randNum(res.data.quotes.length)];
-          this.loading = false;
-        })
-        .catch(e => this.errors.push(e));
-    },
   },
 };
 </script>
@@ -39,7 +28,7 @@ export default {
   display: block;
   margin: 1em auto;
 }
-textarea{
+#smartWrap>textarea {
   width: 90%;
   height: 140px;
 }
