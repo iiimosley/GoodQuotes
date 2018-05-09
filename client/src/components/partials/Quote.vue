@@ -9,13 +9,7 @@
 
 export default {
   name: 'Quote',
-  data() {
-    return {
-      quote: '',
-      author: '',
-      title: ''
-    };
-  },  
+  props: ['quote', 'author', 'title']
 }
 
 </script>
