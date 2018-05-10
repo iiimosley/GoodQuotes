@@ -6,6 +6,7 @@ Client side rendering of API's user interface was leveraged with Vue.Js. Vue is 
 
 In progress: 
 + Authenication via Passport
++ Single Server Environment
 + _SmartQuote_ rendering via IBM Watson Natural Language Understanding API
 + Deployment to Heroku
 
