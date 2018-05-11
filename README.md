@@ -15,18 +15,18 @@ First, clone this repo
 ```
 git clone https://github.com/iiimosley/GoodQuotes.git
 ```
-To activate the server, please run the following commands:
+Then, instantiate the initial build.
 ```
-cd server
-npm start
+npm run build
 ```
-To activate client, please run the following commands:
+& Run the development environment
 ```
-cd client
 npm run dev
 ```
 
 ### API
+Direct access to API will be located on `localhost:8080` (development environment will be `localhost:8081`)
+
 All initial queries need a + separated between each word
 
 + Example: `/author/george+r+r+martin`
@@ -52,4 +52,3 @@ Example: `/author/tom+robbins`
 Query: `/title/...`
 
 Example: `/title/crime+and+punishment`
-
