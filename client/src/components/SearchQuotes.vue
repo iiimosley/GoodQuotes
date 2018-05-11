@@ -12,8 +12,8 @@
   </div>
   <div v-if="searchReturn">
     <Quote v-for="(qu, i) in quotes" :key="i" :quote="qu.quote" :author="qu.author" :title="qu.publication" ></Quote>
-    <section>{{quoteData.$data}}</section>
   </div>
+  <div id="errMsg" v-if="errMsg">Could not retreive any {{checked}} results for "{{searchContent}}"</div>
 </div>
 </template>
 
@@ -31,6 +31,7 @@ export default {
       checked: '',
       radioSelected: true,
       searchReturn: false,
+      errMsg: false,
       quotes: [],
       quoteData: ''
     }
@@ -45,14 +46,29 @@ export default {
         let searchField = this.searchContent.toLowerCase().replace(/\s/g, '+');
         axios.get(`http://localhost:8081/${this.checked}/${searchField}}`)
         .then((res) => {
+          this.errMsg = false;
           this.quotes = res.data.quotes;
           this.quoteData = res.data;
           this.searchReturn = true;
         })
-        .catch(e => this.errors.push(e));
+        .catch(e => {
+          this.searchReturn = false;
+          this.errMsg = true;
+        });
        } else { 
          this.radioSelected = false;
        }
+    }
+  },
+  watch: {
+    searchContent() {
+      if (!this.searchContent) {
+          this.searchReturn = false;
+          this.errMsg = false;
+        };
+    },
+    checked(){
+      this.errMsg = false;
     }
   }
 };
@@ -60,6 +76,7 @@ export default {
 </script>
 
 <style scoped>
+
 #searchContainer {
   display: block;
   margin: 2em auto;
@@ -91,6 +108,10 @@ export default {
 #searchContainer>p{
   color: red;
   text-align: center
+}
+
+#errMsg {
+  text-align: center;
 }
 
 </style>

@@ -30,5 +30,5 @@ module.exports.getTitleQuotes = (req, res, next) => {
     });
     res.status(200).json(quoteData);
   })
-  .catch(err => res.status(500).json(err));
+  .catch(err => res.status(418).json(err));
 };

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h3>{{header}}</h3>
+  <h1>{{header}}</h1>
   <ul>
     <li v-for="(link, index) in links" :key="index">
       <a :href="link.url">{{link.text}}</a>
@@ -39,16 +39,51 @@ export default {
 </script>
 
 <style scoped>
+div {
+  background: rgb(0, 13, 51);
+  color: whitesmoke;
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+  padding: .4em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all .18s;
+}
+
 ul {
   display: flex;
-  width: 60%;
+  /* max-width: 80%; */
   margin: 1em auto;
   justify-content: space-evenly;
-  align-items: center
+  align-items: center;
+  padding-bottom: 1em;
 }
 
 li {
   display: inline-block;
-  text-decoration: none;
+  width: 20%;
+  text-align: center
 }
+
+a:hover {
+  color: bisque;
+  letter-spacing: .1em;
+  text-shadow: 0 0 .1em whitesmoke;
+}
+
+/* a::after {
+    display: block;
+    letter-spacing: .1em;
+    text-shadow: 0 0 .1em whitesmoke;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+} */
+
 </style>
