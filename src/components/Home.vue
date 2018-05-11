@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     getQuote: function() {
-      axios.get(`http://localhost:8081/tag/${this.tags[randNum(this.tags.length)]}`)
+      axios.get(`${location.origin}/tag/${this.tags[randNum(this.tags.length)]}`)
         .then((res) => {
           this.quote = res.data.quotes[randNum(res.data.quotes.length)];
           this.loading = false;
