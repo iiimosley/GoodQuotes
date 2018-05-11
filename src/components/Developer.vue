@@ -1,6 +1,5 @@
 <template>
 <div class="mainWrap">
-  <h3>{{welcome}}</h3>
   <div v-for="(pre, i) in preface" :key="`preface${i}`">
     <p v-html="pre.statement"></p>
     <p>Example: <span class="query">{{pre.example}}</span></p>

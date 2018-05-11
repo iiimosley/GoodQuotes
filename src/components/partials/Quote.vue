@@ -1,7 +1,7 @@
 <template>
 <div class='quote'>
   <p>{{quote}}</p>
-  <p> -- {{author}} <span v-if="title">({{title}})</span></p>
+  <p> -- {{author}} <span v-if="title">({{title}})</span><slot></slot></p>
 </div>
 </template>
 

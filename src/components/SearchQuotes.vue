@@ -11,7 +11,9 @@
     <p v-if="!radioSelected">Please select a search category</p>
   </div>
   <div v-if="searchReturn">
-    <Quote v-for="(qu, i) in quotes" :key="i" :quote="qu.quote" :author="qu.author" :title="qu.publication" ></Quote>
+    <Quote v-for="(qu, i) in quotes" :key="i" :quote="qu.quote" :author="qu.author" :title="qu.publication" >
+      <button></button>
+    </Quote>
   </div>
   <div id="errMsg" v-if="errMsg">Could not retreive any {{checked}} results for "{{searchContent}}"</div>
 </div>
@@ -44,7 +46,7 @@ export default {
     searchQuote() {
       if (this.checked) {
         let searchField = this.searchContent.toLowerCase().replace(/\s/g, '+');
-        axios.get(`${location.origin}/${this.checked}/${searchField}`)
+        axios.get(`http://localhost:8080/${this.checked}/${searchField}`)
         .then((res) => {
           this.errMsg = false;
           this.quotes = res.data.quotes;
