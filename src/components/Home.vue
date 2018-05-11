@@ -1,6 +1,5 @@
 <template>
 <div  v-if="!loading">
-  <h3>{{msg}}</h3>
   <Quote :quote="quote.quote" :author="quote.author" :title="quote.title"/>
 </div>
 </template>

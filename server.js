@@ -13,8 +13,7 @@ const port = process.env.PORT || 8080;
 
 // static rendering
 app.use(cors());
-app.use(express.static(__dirname + "/public"));
-app.use("/vue", express.static(__dirname + "node_modules/vue/"));
+app.use('/', express.static(__dirname + "/"));
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
