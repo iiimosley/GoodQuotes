@@ -24,10 +24,10 @@ export default {
         url: '#/search',
         text: 'SearchQuote',
       },
-      {
-        url: '#/smartquote',
-        text: 'SmartQuote',
-      },
+      // {
+      //   url: '#/smartquote',
+      //   text: 'SmartQuote',
+      // },
       {
         url: '#/developer',
         text: 'Developer',

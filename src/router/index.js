@@ -19,11 +19,11 @@ export default new Router({
       name: 'SearchQuotes',
       component: SearchQuotes,
     },
-    {
-      path: '/smartquote',
-      name: 'SmartQuote',
-      component: SmartQuote,
-    },
+    // {
+    //   path: '/smartquote',
+    //   name: 'SmartQuote',
+    //   component: SmartQuote,
+    // },
     {
       path: '/developer',
       name: 'Developer',
