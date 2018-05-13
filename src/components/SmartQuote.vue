@@ -4,7 +4,7 @@
     <textarea v-model="content"></textarea>
     <button @click="watsonPost()">{{msg}}</button>
   </div>
-  <div class="output" v-if="output">
+  <div class="output" v-if="smartRtn">
     <Quote :quote="output.quote" :author="output.author" :title="output.publication" ></Quote>
   </div>
 </div>
@@ -21,6 +21,7 @@ export default {
     return {
       msg: "SmartQuote",
       content: '',
+      smartRtn: false,
       output: {},
     };
   },
@@ -30,6 +31,7 @@ export default {
       axios.post('http://localhost:8080/smart', { search: this.content })
       .then(res => axios.get(`http://localhost:8080/tag/${res.data.keywords[randInt(res.data.keywords.length)].text}`))
       .then(smartQs => {
+          this.smartRtn = true
           this.output = smartQs.data.quotes[randInt(smartQs.data.quotes.length)];
         })
       .catch(err => console.log(err));
