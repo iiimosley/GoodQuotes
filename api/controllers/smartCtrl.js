@@ -23,7 +23,7 @@ module.exports.getSmartQuote = (req,res,next) => {
       console.log('error:', err);
     } else {
       console.log(JSON.stringify(response, null));
-      res.json(response);
+      return res.json(response);
     }
   });
 
