@@ -4,12 +4,16 @@
     <textarea v-model="content"></textarea>
     <button @click="watsonPost()">{{msg}}</button>
   </div>
-  <div class="output">{{output}}</div>
+  <div class="output" v-if="output">
+    <Quote :quote="output.quote" :author="output.author" :title="output.publication" ></Quote>
+  </div>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
+import randInt from '../services/randomNum';
+import Quote from './partials/Quote';
 
 export default {
   name: 'Home',
@@ -17,14 +21,18 @@ export default {
     return {
       msg: "SmartQuote",
       content: '',
-      output: '',
+      output: {},
     };
   },
+  components: {Quote},
   methods: {
     watsonPost() {
       axios.post('http://localhost:8080/smart', { search: this.content })
-        .then(res=>console.log(res))
-        .catch(err=>console.log(err));
+      .then(res => axios.get(`http://localhost:8080/tag/${res.data.keywords[randInt(res.data.keywords.length)].text}`))
+      .then(smartQs => {
+          this.output = smartQs.data.quotes[randInt(smartQs.data.quotes.length)];
+        })
+      .catch(err => console.log(err));
     }
   }
 };
