@@ -55,6 +55,12 @@ module.exports = {
       }
     ]
   },
+  node: {
+    console: false,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  },
   resolve: {
     alias: {
       vue$: "vue/dist/vue.esm.js"
