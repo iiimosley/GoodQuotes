@@ -2,7 +2,6 @@
 node_modules/
 /dist/
 /api/config/watson-config.js
-/api/config/watson-config.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
