@@ -1,17 +1,32 @@
 {
   "development": {
     "database": "goodquotes",
-    "host": "127.0.0.1",
-    "dialect": "postgresql"
+    "host": "goodquotesapi.herokuapp.com",
+    "dialect": "postgresql",
+    "dialectOptions": {
+      "ssl": {
+        "require": true
+      }
+    }
   },
   "test": {
     "database": "goodquotes",
-    "host": "127.0.0.1",
-    "dialect": "postgresql"
+    "host": "goodquotesapi.herokuapp.com",
+    "dialect": "postgresql",
+    "dialectOptions": {
+      "ssl": {
+        "require": true
+      }
+    }
   },
   "production": {
     "database": "goodquotes",
-    "host": "127.0.0.1",
-    "dialect": "postgresql"
+    "host": "goodquotesapi.herokuapp.com",
+    "dialect": "postgresql",
+    "dialectOptions": {
+      "ssl": {
+        "require": true
+      }
+    }
   }
 }
