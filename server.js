@@ -13,7 +13,8 @@ const port = process.env.PORT || 8080;
 
 // static rendering
 app.use(cors());
-app.use('/', express.static(__dirname + "/"));
+// app.use("/", express.static(__dirname + "/"));
+app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')));
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
