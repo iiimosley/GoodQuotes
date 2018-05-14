@@ -45,7 +45,7 @@ export default {
     searchQuote() {
       if (this.checked) {
         let searchField = this.searchContent.toLowerCase().replace(/\s/g, '+');
-        axios.get(`${location.origin}/${this.checked}/${searchField}`)
+        axios.get(`https://goodquotesapi.herokuapp.com/${this.checked}/${searchField}`)
         .then((res) => {
           this.errMsg = false;
           this.quotes = res.data.quotes;
