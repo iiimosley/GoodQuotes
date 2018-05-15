@@ -2,12 +2,13 @@
 const passport = require("passport");
 
 module.exports.register = (req, res, next) => {
+  console.log('user', req.body);
   // if (req.body.password === req.body.confirmation) { // move to client validation
   console.log("Trying to register new user");
 
   // first argument is name of the passport strategy we created in passport-strat.js
   passport.authenticate("local-signup", (err, user, msgObj) => {
-    // console.log("Where are we? session.js", user);
+    console.log("Where are we? session.js", user);
 
     if (err) {
       return next(err);

@@ -46,6 +46,12 @@ export default {
       ],
     };
   },
+  methods: {
+    ...Vuex.mapActions(["logout"])
+  },
+  computed: {
+    ...Vuex.mapGetters(["isLoggedIn"])
+  }
 };
 
 </script>

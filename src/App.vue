@@ -2,7 +2,7 @@
   <div id="app">
     <Navbar :user="authUser"/>
     <transition name="fade" mode="out-in">
-    <router-view/>
+    <router-view :user="currentUser" :auth="authUser"/>
     </transition>
   </div>
 </template>
