@@ -9,8 +9,12 @@ const generateHash = password => {
 module.exports.register = (req, res, next) => {
   const User = req.app.get("models").User;
   console.log(req.body)
-  // const User = req.app.get("models").User;
-  // User.findOne()
+  User.findOne({
+    where: {
+      email: req.body.email,
+      username: req.body.username
+    }
+  }).then(data=>{console.log(data);});
   
 };
 
