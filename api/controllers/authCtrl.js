@@ -8,11 +8,16 @@ const generateHash = password => {
 
 module.exports.register = (req, res, next) => {
   const User = req.app.get("models").User;
-  console.log(req.body)
   User.findOne({where: {email: req.body.email}})
   .then(data=>{
     if (!data){
       console.log('nothing to see here, set to jet');
+      User.create({
+        email: req.body.email,
+        password: generateHash(req.body.password)
+      }).then(newUser=>{
+        console.log(JSON.stringify(newUser.id));
+      });
     } else {
       console.log('bummer, its a match');
     }
