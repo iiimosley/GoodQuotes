@@ -50,9 +50,12 @@ export default {
           headers: {'Content-Type': 'application/json'}})
           .then(thisUser => {
             console.log(this.user);
-            this.user = thisUser.id;
-            this.auth = true;
-            router.push('Home');
+            this.$store.dispatch("login", {
+              email: this.account.email,
+              password: this.account.password
+            }).then(res => {
+              this.$router.push('/');
+            })
         })
         .catch(e => this.errors.push(e));
       }

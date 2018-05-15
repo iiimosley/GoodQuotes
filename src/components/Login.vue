@@ -36,6 +36,16 @@ export default {
 
 <style scoped>
 
+form {
+  max-width: 250px;
+  margin: 3em auto;
+}
+
+form>*{
+  display: block;
+  width: 100%;
+  margin: 1em auto;
+}
 
 
 </style>
