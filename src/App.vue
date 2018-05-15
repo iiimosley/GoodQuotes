@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Navbar :user="authUser"/>
+    <Navbar />
     <transition name="fade" mode="out-in">
-    <router-view :user="currentUser" :auth="authUser"/>
+    <router-view />
     </transition>
   </div>
 </template>
@@ -12,12 +12,6 @@ import Navbar from './components/partials/Navbar';
 
 export default {
   name: 'App',
-  data() {
-  return {
-      authUser: false,
-      currentUser: ''
-    }
-  },
   components: { Navbar },
 };
 </script>

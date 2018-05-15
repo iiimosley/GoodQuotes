@@ -5,14 +5,14 @@
     <li v-for="(link, index) in links" :key="index">
       <a :href="link.url">{{link.text}}</a>
     </li>
-    <li v-if="!user">
+    <li v-if="!isLoggedIn">
       <a href="#/login">Login</a>
     </li>
-    <li v-if="!user">
+    <li v-if="!isLoggedIn">
       <a href="#/register">Register</a>
     </li>
-    <li v-if="user">
-      <a href="#/logout">Logout</a>
+    <li v-if="isLoggedIn">
+      <a href="#" @click="logout">Logout</a>
     </li>
   </ul>
 </div>
@@ -20,10 +20,11 @@
 
 <script>
 import App from '../../App';
+import Vuex from 'vuex'
+
 
 export default {
   name: 'Navbar',
-  props: ['user'],
   data() {
     return {
       header: 'GoodQuotes',
