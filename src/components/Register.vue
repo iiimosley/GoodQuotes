@@ -1,10 +1,6 @@
 <template>
 <div id="registerForm">
   <div>
-  <label for="regUsername">Username</label>
-  <input type="text" v-model="account.username" id="regUsername"/>
-  </div>
-  <div>
   <label for="regEmail">Email</label>
   <input type="text" v-model="account.email" id="regEmail"/>
   </div>
@@ -31,7 +27,6 @@ export default {
   data() {
     return {
       account: {
-        username: '',
         email: '',
         password: '',
         confirm: ''

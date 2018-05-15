@@ -1,14 +1,12 @@
 {
   "users": [
     {
-      "username": "bobsmith",
       "email": "bob@smith.com",
-      "password": "$2a$08$eKaLPVy9RcKS01.XUayCn.x9nhBn7B1zx1AOoO0bFjakSBwwcLJoO"
+      "password": "$2a$10$pvjPhSHWKzpATt59FNwE7.KWCmNNVP5yuGISSQt9KQgJDT84hFtBe"
     },
     {
-      "username": "the_dude",
       "email": "a@a.com",
-      "password": "$2a$08$eKaLPVy9RcKS01.XUayCn.x9nhBn7B1zx1AOoO0bFjakSBwwcLJoO"
+      "password": "$2a$10$cP7aua8virTXxvTQCdL4auxQzb4pFR8FU4uhFht2QeLBoxMn9ok1a"
     }
   ]
 }
