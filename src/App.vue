@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <Navbar/>
+    <Navbar :user="authUser"/>
+    <transition name="fade" mode="out-in">
     <router-view/>
+    </transition>
   </div>
 </template>
 
@@ -12,7 +14,8 @@ export default {
   name: 'App',
   data() {
   return {
-      isAuthenticated: false
+      authUser: false,
+      currentUser: ''
     }
   },
   components: { Navbar },
@@ -25,6 +28,13 @@ h3 {
 }
 .mainWrap {
   margin: 1em auto;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
 </style>

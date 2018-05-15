@@ -5,14 +5,25 @@
     <li v-for="(link, index) in links" :key="index">
       <a :href="link.url">{{link.text}}</a>
     </li>
+    <li v-if="!user">
+      <a href="#/login">Login</a>
+    </li>
+    <li v-if="!user">
+      <a href="#/register">Register</a>
+    </li>
+    <li v-if="user">
+      <a href="#/logout">Logout</a>
+    </li>
   </ul>
 </div>
 </template>
 
 <script>
+import App from '../../App';
 
 export default {
   name: 'Navbar',
+  props: ['user'],
   data() {
     return {
       header: 'GoodQuotes',
@@ -36,6 +47,7 @@ export default {
     };
   },
 };
+
 </script>
 
 <style scoped>
@@ -46,8 +58,9 @@ div {
 
 h1 {
   text-align: center;
+  letter-spacing: .1em;
   margin: 0;
-  padding: .4em;
+  padding: .8em;
 }
 
 a {
@@ -77,13 +90,5 @@ a:hover {
   text-shadow: 0 0 .1em whitesmoke;
 }
 
-/* a::after {
-    display: block;
-    letter-spacing: .1em;
-    text-shadow: 0 0 .1em whitesmoke;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-} */
 
 </style>
