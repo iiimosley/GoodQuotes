@@ -4,7 +4,7 @@
   "description": "GoodReads Quote Search Webscraper RESTful API",
   "scripts": {
     "start": "node server.js",
-    "dev": "concurrently --kill-others \"npm run vue\" \"npm run server\"",
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run vue\"",
     "server": "cross-env NODE_ENV='development' node server.js",
     "vue": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"

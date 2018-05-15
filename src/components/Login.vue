@@ -1,14 +1,16 @@
 <template>
 <div>
 <form @submit.prevent="login()">
-  <input type="text" placeholder="email" v-model="this.account.email">
-  <input type="password" placeholder="password" v-model="this.account.password">
+  <input type="text" placeholder="email" v-model="account.email">
+  <input type="password" placeholder="password" v-model="account.password">
   <button type="submit">Login</button>
 </form>
 </div>
 </template>
 
 <script> 
+
+import axios from 'axios';
 
 export default {
   data() {
@@ -22,12 +24,15 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch("login", {
-        email: this.account.email,
-        password: this.account.password
-      }).then(res => {
-        this.$router.push('/');
-      })
+      axios.post(`http://localhost:8080/login`, this.account, {
+      headers: {'Content-Type': 'application/json'}})
+      .then(user=> console.log(user));
+        // this.$store.dispatch("login", {
+        //   email: this.account.email,
+        //   password: this.account.password
+        // }).then(res => {
+        //   this.$router.push('/');
+        // })
     }
   },
 }

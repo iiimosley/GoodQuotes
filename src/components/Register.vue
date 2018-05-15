@@ -46,7 +46,7 @@ export default {
       } else {
         this.error = false;
         // console.log(this.account);
-        axios.post(`http://localhost:8080/register`, JSON.stringify(this.account), {
+        axios.post(`http://localhost:8080/register`, this.account, {
           headers: {'Content-Type': 'application/json'}})
           .then(thisUser => {
             console.log(this.user);
@@ -73,7 +73,9 @@ export default {
 }
 
 button {
-  display: block;   
+  display: block;  
+  margin: 1em auto; 
 }
+
 
 </style>

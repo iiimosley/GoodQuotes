@@ -8,18 +8,21 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 
-// require('./api/config/passport');
+require('./api/config/passport');
+
 
 const routes = require('./api/routes');
 const port = process.env.PORT || 8080;
+
+app.set('models', require('./api/models'));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // static rendering
 app.use(cors());
 app.use("/", express.static(__dirname + "/"));
 
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(routes);
 
 app.use((req, res, next) => {
