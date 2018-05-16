@@ -13,7 +13,7 @@
   <div v-if="searchReturn">
     <Quote v-for="(qu, i) in quotes" :key="i" :quote="qu.quote" :author="qu.author" :title="qu.publication" >
       <button @click="likeQuote">
-        <img src="../assets/star.png"/>
+        <img :src="quoteCheck(qu.quote)"/>
       </button>
     </Quote>
   </div>
@@ -42,6 +42,9 @@ export default {
   },
   components: {Quote},
   methods: {
+    quoteCheck(q){
+      return q ? require('../assets/goldstar.png') : require('../assets/star.png');
+    },
     toggleSearch() {
       this.radioSelected = true;
     },
