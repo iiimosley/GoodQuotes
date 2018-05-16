@@ -1,7 +1,7 @@
 <template>
 <div id="homeContainer" v-if="!loading">
   <div id="introWrap">
-    <p>GoodQuotes is RESTful API constructed from GoodReads search engine. This API is open to the public and free to use (no API key required). For documentation on how to use the api, please visit the <a href="/#/developer">Developer</a> page.</p> 
+    <p>GoodQuotes is RESTful API constructed from GoodReads search engine. This API is open to the public and free to use (no API key required). For documentation on how to use the API, please visit the <a href="/#/developer">Developer</a> page.</p> 
     <p id="p__align" v-if="!isLoggedIn">For access to searching and saving your favorite quotes,<br>please <a href="#/login">log in</a> or <a href="#/register">register</a></p>
   </div>
 <div>

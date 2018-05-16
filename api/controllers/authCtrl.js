@@ -6,6 +6,8 @@ const generateHash = password => {
   return bCrypt.hashSync(password, bCrypt.genSaltSync(8));
 };
 
+const comparePW = (logPW, dbPW) => bCrypt.compareSync(logPW, dbPW);
+
 module.exports.register = (req, res, next) => {
   const User = req.app.get("models").User;
   User.findOne({where: {email: req.body.email}})
@@ -22,12 +24,28 @@ module.exports.register = (req, res, next) => {
       console.log('bummer, its a match');
     }
   });
-  
 };
 
 module.exports.login = (req, res, next) => { 
   const User = req.app.get("models").User;
-  console.log(req.body)
+  User.findOne({ where: { email: req.body.email } })
+  .then(authUser => {
+    if(!authUser) console.log('no matching user');
+    console.log(req.body.password);
+    if(comparePW(req.body.password, authUser.password)){
+      console.log('hott diggity we\'re in!!!');
+    } else {
+      console.log('not a matching password');
+    }
+    // if (authUser) {
+    //   console.log('nothing to see here, set to jet');
+    //   console.log(authUser);
+    // } else {
+    //   console.log('bummer, does not match');
+    // }
+  }).catch(err=>{
+    console.log(err);
+  });
 };
 
 

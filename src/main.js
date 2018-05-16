@@ -12,10 +12,12 @@ Vue.use(Vuex);
 const LOGIN = "LOGIN";
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGOUT = "LOGOUT";
+const USER = "USER"
 
 const store = new Vuex.Store({
   state: {
-    isLoggedIn: localStorage.getItem("token")
+    isLoggedIn: localStorage.getItem("token"),
+    currentUser: ''
   },
   mutations: {
     [LOGIN](state) {
@@ -27,6 +29,9 @@ const store = new Vuex.Store({
     },
     [LOGOUT](state) {
       state.isLoggedIn = false;
+    },
+    [USER](state, id) {
+      Object.assign(state.currentUser, id)
     }
   },
   actions: {
@@ -36,7 +41,7 @@ const store = new Vuex.Store({
       rootState
     }, creds) {
       console.log("login...", creds);
-      commit(LOGIN); // show spinner
+      commit(LOGIN); 
       return new Promise(resolve => {
         setTimeout(() => {
           localStorage.setItem("token", "JWT");
@@ -50,6 +55,7 @@ const store = new Vuex.Store({
       commit
     }) {
       localStorage.removeItem("token");
+      this.state.currentUser = '';
       commit(LOGOUT);
     }
   },
@@ -61,7 +67,6 @@ const store = new Vuex.Store({
 });
 
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
