@@ -2,14 +2,14 @@
 <div>
   <h1>{{header}}</h1>
   <ul>
-    <li v-for="(link, index) in links" :key="index">
+    <li v-for="(link, i) in links" :key="`link${i}`">
       <a :href="link.url">{{link.text}}</a>
     </li>
-    <li v-if="!isLoggedIn">
-      <a href="#/login">Login</a>
+    <li v-if="!isLoggedIn" v-for="(link, i) in publicLinks" :key="`public${i}`">
+      <a :href="link.url">{{link.text}}</a>
     </li>
-    <li v-if="!isLoggedIn">
-      <a href="#/register">Register</a>
+    <li v-if="isLoggedIn" v-for="(link, i) in authLinks" :key="`auth${i}`">
+      <a :href="link.url">{{link.text}}</a>
     </li>
     <li v-if="isLoggedIn">
       <a href="#" @click="logout">Logout</a>
@@ -28,23 +28,32 @@ export default {
   data() {
     return {
       header: 'GoodQuotes',
-      links: [{
-        url: '#/',
-        text: 'Home',
-      },
-      {
-        url: '#/search',
-        text: 'SearchQuote',
-      },
-      // {
-      //   url: '#/smartquote',
-      //   text: 'SmartQuote',
-      // },
-      {
-        url: '#/developer',
-        text: 'Developer',
-      },
-      ],
+        links: [{
+            url: '#/',
+            text: 'Home',
+          },
+          {
+            url: '#/developer',
+            text: 'Developer',
+          }],
+        authLinks: [
+          {
+            url: '#/search',
+            text: 'SearchQuote',
+          },
+          {
+            url: '#/smartquote',
+            text: 'SmartQuote',
+          }],
+        publicLinks: [
+          {
+            url: '#/login',
+            text: 'Login',
+          },
+          {
+            url: '#/register',
+            text: 'Register',
+          }],
     };
   },
   methods: {
@@ -78,7 +87,6 @@ a {
 
 ul {
   display: flex;
-  /* max-width: 80%; */
   margin: 1em auto;
   justify-content: space-evenly;
   align-items: center;
