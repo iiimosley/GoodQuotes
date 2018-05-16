@@ -12,6 +12,9 @@
   </div>
   <div v-if="searchReturn">
     <Quote v-for="(qu, i) in quotes" :key="i" :quote="qu.quote" :author="qu.author" :title="qu.publication" >
+      <button @click="quoteAction">
+        <img :src="quoteCheck(qu.quote)"/>
+      </button>
     </Quote>
   </div>
   <div id="errMsg" v-if="errMsg">Could not retreive any {{checked}} results for "{{searchContent}}"</div>
@@ -24,6 +27,14 @@ import Quote from './partials/Quote';
 
 export default {
   name: 'SearchQuotes',
+  beforeMount() {
+    axios.post(`${this.$store.state.devEnv}/quote-check`, {
+      uid: +this.$store.state.currentUser,
+    }).then(matchedQuotes => {
+      let userQs = matchedQuotes.data.map(q=>q[`Quote.content`]);
+      this.$store.commit('saveQuotes', userQs)
+    });
+  },
   data() {
     return {
       searchContent: '',
@@ -39,6 +50,9 @@ export default {
   },
   components: {Quote},
   methods: {
+    quoteCheck(q){
+      return this.$store.state.userQuotes.includes(q) ? require('../assets/goldstar.png') : require('../assets/star.png');
+    },
     toggleSearch() {
       this.radioSelected = true;
     },
@@ -51,6 +65,12 @@ export default {
           this.quotes = res.data.quotes;
           this.quoteData = res.data;
           this.searchReturn = true;
+          if (this.checked === 'tag'){
+            axios.post(`${this.$store.state.devEnv}/user-tag`, {
+              uid: +this.$store.state.currentUser,
+              tag: this.searchContent
+            })
+          }
         })
         .catch(e => {
           this.searchReturn = false;
@@ -59,6 +79,13 @@ export default {
        } else { 
          this.radioSelected = false;
        }
+    },
+    quoteAction: function (e){
+      axios.post(`${this.$store.state.devEnv}/user-quote`, {
+        content: e.path[3].children[0].innerText,
+        author: e.path[3].children[1].children[0].innerText,
+        uid: +this.$store.state.currentUser
+      })
     }
   },
   watch: {
@@ -113,6 +140,23 @@ export default {
 
 #errMsg {
   text-align: center;
+}
+
+button {
+  width: 40px;
+  height: auto;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+button>img{
+  width: 50%;
+  height: auto;
 }
 
 </style>

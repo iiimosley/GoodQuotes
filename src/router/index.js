@@ -22,6 +22,11 @@ export default new Router({
       component: SearchQuotes,
     },
     {
+      path: '/smartquote',
+      name: 'SmartQuote',
+      component: SmartQuote,
+    },
+    {
       path: '/login',
       name: 'Login',
       component: Login,

@@ -17,12 +17,7 @@
   },
   "production": {
     "database": "goodquotes",
-    "host": "goodquotesapi.herokuapp.com",
-    "dialect": "postgresql",
-    "dialectOptions": {
-      "ssl": {
-        "require": true
-      }
-    }
+    "host": "127.0.0.1",
+    "dialect": "postgresql"
   }
 }

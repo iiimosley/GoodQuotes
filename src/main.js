@@ -20,6 +20,7 @@ const store = new Vuex.Store({
   state: {
     isLoggedIn: localStorage.getItem("token"),
     currentUser: '',
+    userQuotes: [],
     devEnv: process.env.NODE_ENV === "development" ? 'http://localhost:8080' : ''
   },
   mutations: {
@@ -35,15 +36,13 @@ const store = new Vuex.Store({
     },
     authUser(state, id) {
       state.currentUser = +id
+    },
+    saveQuotes(state, qs) {
+      state.userQuotes = qs
     }
   },
   actions: {
-    login({
-      state,
-      commit,
-      rootState
-    }, creds) {
-      console.log("login...", creds);
+    login({state,commit,rootState}, creds) {
       commit(LOGIN); 
       return new Promise(resolve => {
         setTimeout(() => {
@@ -52,11 +51,8 @@ const store = new Vuex.Store({
           resolve();
         }, 1000);
       });
-
     },
-    logout({
-      commit
-    }) {
+    logout({commit}) {
       localStorage.removeItem("token");
       this.state.currentUser = '';
       commit(LOGOUT);
@@ -65,6 +61,12 @@ const store = new Vuex.Store({
   getters: {
     isLoggedIn: state => {
       return state.isLoggedIn;
+    },
+    currentUser: state => {
+      return state.currentUser;
+    },
+    userQuotes: state => {
+      return state.userQuotes
     }
   }
 });
