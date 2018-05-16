@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     login() {
-      axios.post(`/login`, this.account, {
+      axios.post(`${process.env.NODE_ENV==="development" ? 'http://localhost:8080' : ''}/login`, this.account, {
       headers: {'Content-Type': 'application/json'}})
       .then(user=> {
         this.$store.commit('authUser', user.data.id)

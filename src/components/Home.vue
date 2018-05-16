@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     getQuote: function() {
-      axios.get(`/tag/${this.tags[randNum(this.tags.length)]}`)
+      axios.get(`${process.env.NODE_ENV==="development" ? 'http://localhost:8080' : ''}/tag/${this.tags[randNum(this.tags.length)]}`)
         .then((res) => {
           this.quote = res.data.quotes[randNum(res.data.quotes.length)];
           this.loading = false;

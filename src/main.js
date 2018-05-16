@@ -7,6 +7,8 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
+console.log(process.env.NODE_ENV);
+
 Vue.use(Vuex);
 
 const LOGIN = "LOGIN";
