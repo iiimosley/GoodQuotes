@@ -1,14 +1,14 @@
-const express = require('express');
-const router = express.Router();
+'use strict';
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
+const { Router } = require('express');
+const router = Router();
 
-/* GET user profile. */
-router.get('/profile', function (req, res, next) {
-  res.send(req.user);
-});
+const { addUserQuote, deleteUserQuote, addUserTag } = require("../controllers/userCtrl.js");
+
+router.post('/user-post', addUserQuote);
+
+router.delete('/user-post', deleteUserQuote);
+
+router.post('/user-tag', addUserTag);
 
 module.exports = router;

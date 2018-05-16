@@ -51,6 +51,13 @@ export default {
           this.quotes = res.data.quotes;
           this.quoteData = res.data;
           this.searchReturn = true;
+          if (this.checked === 'tag'){
+            console.log(this.$store.state);
+            axios.post(`${this.$store.state.devEnv}/user-tag`, {
+              uid: +this.$store.state.currentUser,
+              tag: this.searchContent
+            })
+          }
         })
         .catch(e => {
           this.searchReturn = false;

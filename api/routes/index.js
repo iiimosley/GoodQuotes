@@ -8,5 +8,6 @@ router.use(require('./tag-route'));
 router.use(require('./title-route'));
 router.use(require('./auth-route'));
 router.use(require('./smart-route'));
+router.use(require('./user-route'));
 
 module.exports = router;
