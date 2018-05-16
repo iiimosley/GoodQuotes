@@ -1,6 +1,14 @@
 <template>
-<div  v-if="!loading">
-  <Quote :quote="quote.quote" :author="quote.author" :title="quote.title"/>
+<div id="homeContainer" v-if="!loading">
+  <div id="introWrap">
+    <p>GoodQuotes is RESTful API constructed from GoodReads search engine. This API is open to the public and free to use (no API key required). For documentation on how to use the API, please visit the <a href="#/developer">Developer</a> page.</p> 
+    <p id="p__align" v-if="!isLoggedIn">For access to searching and saving your favorite quotes,<br>please <a href="#/login">log in</a> or <a href="#/register">register</a></p>
+  </div>
+<div>
+  <transition name="fade" mode="out-in">
+  <Quote id="homeQuote" :quote="quote.quote" :author="quote.author" :title="quote.title"/>
+  </transition>
+</div>
 </div>
 </template>
 
@@ -8,7 +16,7 @@
 import axios from 'axios';
 import randNum from '../services/randomNum';
 import Quote from './partials/Quote';
-
+import Vuex from 'vuex'
 
 export default {
   name: 'Home',
@@ -26,7 +34,7 @@ export default {
   },
   methods: {
     getQuote: function() {
-      axios.get(`${location.origin}/tag/${this.tags[randNum(this.tags.length)]}`)
+      axios.get(`${this.$store.state.devEnv}/tag/${this.tags[randNum(this.tags.length)]}`)
         .then((res) => {
           this.quote = res.data.quotes[randNum(res.data.quotes.length)];
           this.loading = false;
@@ -34,15 +42,34 @@ export default {
         .catch(e => this.errors.push(e));
     },
   },
+  computed: {
+    ...Vuex.mapGetters(["isLoggedIn"])
+  },
 };
 </script>
 
 <style scoped>
-#quote{
-  width: 50%;
-  margin: 2em auto;
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
 }
-p:nth-child(2) {
-  text-align: right;
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
+
+#introWrap{
+  width: 40%;
+  margin: 5em auto;
+  font-size: 1.2em;
+  line-height: 1.8em;
+}
+
+#homeQuote {
+  font-size: 1.3em;
+}
+
+#p__align {
+  text-align: center;
+}
+
 </style>

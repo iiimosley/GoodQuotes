@@ -1,7 +1,7 @@
 <template>
 <div class='quote'>
   <p>{{quote}}</p>
-  <p> -- {{author}} <span v-if="title">({{title}})</span><slot></slot></p>
+  <p> -- {{author}} <span id="quoteTitle" v-if="title">({{title}})</span><slot></slot></p>
 </div>
 </template>
 
@@ -17,9 +17,15 @@ export default {
 <style scoped>
 
 .quote{
+  font-family: 'Merriweather', Helvetica, sans-serif;
   width: 50%;
   margin: 2em auto;
 }
+
+#quoteTitle {
+  font-style: italic;
+}
+
 p:nth-child(2) {
   text-align: right;
 }

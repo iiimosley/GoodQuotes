@@ -2,23 +2,23 @@
 
 const express = require('express');
 const app = express();
-const session = require("express-session");
-const passport = require("passport");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 
+
 const routes = require('./api/routes');
 const port = process.env.PORT || 8080;
+
+app.set('models', require('./api/models'));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // static rendering
 app.use(cors());
 app.use("/", express.static(__dirname + "/"));
-// app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')));
 
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(routes);
 
 app.use((req, res, next) => {

@@ -1,20 +1,11 @@
-'use strict';
+'use strict'
 
-const { Router } = require('express');
-const router = Router();
+const express = require('express');
+const router = express.Router();
 
-const { register, login, logout } = require("../controllers/authCtrl");
+const { register, login } = require("../controllers/authCtrl.js");
 
 router.post("/register", register);
 router.post("/login", login);
-router.post("/logout", logout);
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated() && (req.user)) {
-    return next();
-  } else {
-    res.redirect('/login');
-  }
-}
 
 module.exports = router;

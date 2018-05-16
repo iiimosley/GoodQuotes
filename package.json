@@ -4,8 +4,8 @@
   "description": "GoodReads Quote Search Webscraper RESTful API",
   "scripts": {
     "start": "node server.js",
-    "dev": "concurrently --kill-others \"npm run vue\" \"npm run server\"",
-    "server": "cross-env NODE_ENV='development' node server.js",
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run vue\"",
+    "server": "cross-env NODE_ENV=development nodemon server.js",
     "vue": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
@@ -20,17 +20,15 @@
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
-    "express-session": "^1.15.6",
     "method-override": "^2.3.10",
     "node-fetch": "^2.1.2",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
     "request": "^2.85.0",
     "sequelize": "^4.37.7",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
+    "vuex": "^3.0.1",
     "watson-developer-cloud": "^3.4.1"
   },
   "devDependencies": {
