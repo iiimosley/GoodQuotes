@@ -12,7 +12,7 @@
   </div>
   <div v-if="searchReturn">
     <Quote v-for="(qu, i) in quotes" :key="i" :quote="qu.quote" :author="qu.author" :title="qu.publication" >
-      <button><span @click="likeQuote">like</span></button>
+      <button @click="likeQuote"><span >like</span></button>
     </Quote>
   </div>
   <div id="errMsg" v-if="errMsg">Could not retreive any {{checked}} results for "{{searchContent}}"</div>
@@ -68,7 +68,8 @@ export default {
        }
     },
     likeQuote: function (e){
-      console.log(e.path[3].firstChild.innerText);
+      console.log(e.path[3].children[0].innerText);
+      console.log(e.path[3].children[1].children[0].innerText);
     }
   },
   watch: {
