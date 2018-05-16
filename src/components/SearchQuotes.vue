@@ -51,7 +51,7 @@ export default {
   components: {Quote},
   methods: {
     quoteCheck(q){
-      return q ? require('../assets/goldstar.png') : require('../assets/star.png');
+      return this.$store.state.userQuotes.includes(q) ? require('../assets/goldstar.png') : require('../assets/star.png');
     },
     toggleSearch() {
       this.radioSelected = true;
