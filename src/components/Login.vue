@@ -26,7 +26,7 @@ export default {
     login() {
       axios.post(`http://localhost:8080/login`, this.account, {
       headers: {'Content-Type': 'application/json'}})
-      .then(user=> console.log(user));
+      .then(user=> console.log(user.data.id));
         // this.$store.dispatch("login", {
         //   email: this.account.email,
         //   password: this.account.password
