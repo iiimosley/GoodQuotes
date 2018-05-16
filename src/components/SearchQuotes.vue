@@ -68,11 +68,11 @@ export default {
        }
     },
     likeQuote: function (e){
-      console.log(e.path[3].children[0].innerText);
-      console.log(e.path[3].children[1].children[0].innerText);
-      axios.post(`${this.$store.state.devEnv}/user-tag`, {
-        uid: +this.$store.state.currentUser,
-        tag: this.searchContent
+      // console.log(e.path[3].children[0].innerText);
+      // console.log(e.path[3].children[1].children[0].innerText);
+      axios.post(`${this.$store.state.devEnv}/user-quote`, {
+        content: e.path[3].children[0].innerText,
+        author: e.path[3].children[1].children[0].innerText
       })
     }
   },

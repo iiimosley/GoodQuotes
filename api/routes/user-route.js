@@ -5,9 +5,9 @@ const router = Router();
 
 const { addUserQuote, deleteUserQuote, addUserTag } = require("../controllers/userCtrl.js");
 
-router.post('/user-post', addUserQuote);
+router.post('/user-quote', addUserQuote);
 
-router.delete('/user-post', deleteUserQuote);
+router.delete('/user-quote', deleteUserQuote);
 
 router.post('/user-tag', addUserTag);
 
