@@ -1,9 +1,7 @@
 "use strict";
 const bCrypt = require("bcrypt-nodejs");
 
-const generateHash = password => {
-  return bCrypt.hashSync(password, bCrypt.genSaltSync(8));
-};
+const generateHash = password => bCrypt.hashSync(password, bCrypt.genSaltSync(8));
 
 module.exports.register = (req, res, next) => {
   const User = req.app.get("models").User;

@@ -20,6 +20,7 @@ const store = new Vuex.Store({
   state: {
     isLoggedIn: localStorage.getItem("token"),
     currentUser: '',
+    userQuotes: [],
     devEnv: process.env.NODE_ENV === "development" ? 'http://localhost:8080' : ''
   },
   mutations: {
@@ -35,6 +36,9 @@ const store = new Vuex.Store({
     },
     authUser(state, id) {
       state.currentUser = +id
+    },
+    saveQuotes(state, qs) {
+      state.userQuotes = qs
     }
   },
   actions: {
@@ -60,6 +64,9 @@ const store = new Vuex.Store({
     },
     currentUser: state => {
       return state.currentUser;
+    },
+    userQuotes: state => {
+      return state.userQuotes
     }
   }
 });

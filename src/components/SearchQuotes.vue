@@ -12,7 +12,7 @@
   </div>
   <div v-if="searchReturn">
     <Quote v-for="(qu, i) in quotes" :key="i" :quote="qu.quote" :author="qu.author" :title="qu.publication" >
-      <button @click="likeQuote">
+      <button @click="quoteAction">
         <img :src="quoteCheck(qu.quote)"/>
       </button>
     </Quote>
@@ -27,6 +27,14 @@ import Quote from './partials/Quote';
 
 export default {
   name: 'SearchQuotes',
+  beforeMount() {
+    axios.post(`${this.$store.state.devEnv}/quote-check`, {
+      uid: +this.$store.state.currentUser,
+    }).then(matchedQuotes => {
+      console.log(matchedQuotes);
+      // this.$store.commit('authUser', user.data.id)
+    });
+  },
   data() {
     return {
       searchContent: '',
@@ -72,7 +80,7 @@ export default {
          this.radioSelected = false;
        }
     },
-    likeQuote: function (e){
+    quoteAction: function (e){
       axios.post(`${this.$store.state.devEnv}/user-quote`, {
         content: e.path[3].children[0].innerText,
         author: e.path[3].children[1].children[0].innerText,

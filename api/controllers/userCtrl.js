@@ -1,5 +1,16 @@
 'use strict';
 
+module.exports.checkQuote = (req, res, next) => {
+  const { User_Quote, Quote } = req.app.get("models");
+  User_Quote.findAll({
+    raw: true,
+    where: {
+      user_id: req.body.uid
+    },
+    include: [{ model: Quote, attributes: ['content'] }]
+  }).then(quotes=>res.status(200).json(quotes));
+};
+
 module.exports.addUserQuote = (req, rsp, next) => {
   const { User_Quote, Quote } = req.app.get("models");
   Quote.findOne({ where: { content: req.body.content } })
