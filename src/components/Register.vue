@@ -44,13 +44,14 @@ export default {
         axios.post(`http://localhost:8080/register`, this.account, {
           headers: {'Content-Type': 'application/json'}})
           .then(newUser => {
-            console.log(newUser.data.id);
-            // this.$store.dispatch("login", {
-            //   email: this.account.email,
-            //   password: this.account.password
-            // }).then(res => {
-            //   this.$router.push('/');
-            // })
+            this.$store.commit('authUser', newUser.data.id)
+            this.$store.dispatch("login", {
+              email: this.account.email,
+              password: this.account.password
+            }).then(res => {
+              console.log(this.$store.state.currentUser);
+              this.$router.push('/');
+            });
         })
         .catch(e => this.errors.push(e));
       }

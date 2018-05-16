@@ -2,13 +2,9 @@
 
 const express = require('express');
 const app = express();
-const session = require("express-session");
-const passport = require("passport");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
-
-require('./api/config/passport');
 
 
 const routes = require('./api/routes');
