@@ -31,8 +31,8 @@ export default {
     axios.post(`${this.$store.state.devEnv}/quote-check`, {
       uid: +this.$store.state.currentUser,
     }).then(matchedQuotes => {
-      console.log(matchedQuotes);
-      // this.$store.commit('authUser', user.data.id)
+      let userQs = matchedQuotes.data.map(q=>q[`Quote.content`]);
+      this.$store.commit('saveQuotes', userQs)
     });
   },
   data() {
