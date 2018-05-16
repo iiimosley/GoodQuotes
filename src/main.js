@@ -19,7 +19,8 @@ const USER = "USER"
 const store = new Vuex.Store({
   state: {
     isLoggedIn: localStorage.getItem("token"),
-    currentUser: ''
+    currentUser: '',
+    devEnv: process.env.NODE_ENV === "development" ? 'http://localhost:8080' : ''
   },
   mutations: {
     [LOGIN](state) {

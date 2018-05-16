@@ -28,8 +28,8 @@ export default {
   components: {Quote},
   methods: {
     watsonPost() {
-      axios.post(`${process.env.NODE_ENV==="development" ? 'http://localhost:8080' : ''}/smart`, { search: this.content })
-      .then(res => axios.get(`${process.env.NODE_ENV==="development" ? 'http://localhost:8080' : ''}/tag/${res.data.keywords[randInt(res.data.keywords.length)].text}`))
+      axios.post(`${this.$store.state.devEnv}/smart`, { search: this.content })
+      .then(res => axios.get(`${this.$store.state.devEnv}/tag/${res.data.keywords[randInt(res.data.keywords.length)].text}`))
       .then(smartQs => {
           this.smartRtn = true
           this.output = smartQs.data.quotes[randInt(smartQs.data.quotes.length)];

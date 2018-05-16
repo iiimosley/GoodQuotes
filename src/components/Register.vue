@@ -41,7 +41,7 @@ export default {
       } else {
         this.error = false;
         // console.log(this.account);
-        axios.post(`${process.env.NODE_ENV==="development" ? 'http://localhost:8080' : ''}/register`, this.account, {
+        axios.post(`${this.$store.state.devEnv}/register`, this.account, {
           headers: {'Content-Type': 'application/json'}})
           .then(newUser => {
             this.$store.commit('authUser', newUser.data.id)
