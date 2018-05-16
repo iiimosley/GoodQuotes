@@ -1,5 +1,4 @@
 "use strict";
-const passport = require("passport");
 const bCrypt = require("bcrypt-nodejs");
 
 const generateHash = password => {

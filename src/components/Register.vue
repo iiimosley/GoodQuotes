@@ -41,7 +41,7 @@ export default {
       } else {
         this.error = false;
         // console.log(this.account);
-        axios.post(`http://localhost:8080/register`, this.account, {
+        axios.post(`/register`, this.account, {
           headers: {'Content-Type': 'application/json'}})
           .then(newUser => {
             this.$store.commit('authUser', newUser.data.id)
