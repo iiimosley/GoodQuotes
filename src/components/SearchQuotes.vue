@@ -70,6 +70,10 @@ export default {
     likeQuote: function (e){
       console.log(e.path[3].children[0].innerText);
       console.log(e.path[3].children[1].children[0].innerText);
+      axios.post(`${this.$store.state.devEnv}/user-tag`, {
+        uid: +this.$store.state.currentUser,
+        tag: this.searchContent
+      })
     }
   },
   watch: {
