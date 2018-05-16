@@ -30,8 +30,8 @@ const store = new Vuex.Store({
     [LOGOUT](state) {
       state.isLoggedIn = false;
     },
-    [USER](state, id) {
-      Object.assign(state.currentUser, id)
+    authUser(state, id) {
+      state.currentUser = +id
     }
   },
   actions: {
