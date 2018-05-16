@@ -12,7 +12,9 @@
   </div>
   <div v-if="searchReturn">
     <Quote v-for="(qu, i) in quotes" :key="i" :quote="qu.quote" :author="qu.author" :title="qu.publication" >
-      <button @click="likeQuote"><span >like</span></button>
+      <button @click="likeQuote">
+        <img src="../assets/star.png"/>
+      </button>
     </Quote>
   </div>
   <div id="errMsg" v-if="errMsg">Could not retreive any {{checked}} results for "{{searchContent}}"</div>
@@ -127,6 +129,23 @@ export default {
 
 #errMsg {
   text-align: center;
+}
+
+button {
+  width: 40px;
+  height: auto;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+button>img{
+  width: 50%;
+  height: auto;
 }
 
 </style>
