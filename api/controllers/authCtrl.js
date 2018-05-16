@@ -11,12 +11,11 @@ module.exports.register = (req, res, next) => {
   User.findOne({where: {email: req.body.email}})
   .then(data=>{
     if (!data){
-      console.log('nothing to see here, set to jet');
       User.create({
         email: req.body.email,
         password: generateHash(req.body.password)
       }).then(newUser=>{
-        console.log(JSON.stringify(newUser.id));
+        res.status(200).json(newUser);
       });
     } else {
       console.log('bummer, its a match');
@@ -30,7 +29,7 @@ module.exports.login = (req, res, next) => {
   .then(authUser => {
     if(!authUser) console.log('no matching user');
     if (bCrypt.compareSync(req.body.password, authUser.password)){
-      res.status(201).json(authUser);
+      res.status(200).json(authUser);
     } else {
       console.log('not a matching password');
     }

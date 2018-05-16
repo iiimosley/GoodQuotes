@@ -43,8 +43,8 @@ export default {
         // console.log(this.account);
         axios.post(`http://localhost:8080/register`, this.account, {
           headers: {'Content-Type': 'application/json'}})
-          .then(thisUser => {
-            console.log(thisUser);
+          .then(newUser => {
+            console.log(newUser);
             // this.$store.dispatch("login", {
             //   email: this.account.email,
             //   password: this.account.password
