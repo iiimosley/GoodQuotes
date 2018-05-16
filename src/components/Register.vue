@@ -40,7 +40,6 @@ export default {
         this.error = true;
       } else {
         this.error = false;
-        // console.log(this.account);
         axios.post(`${this.$store.state.devEnv}/register`, this.account, {
           headers: {'Content-Type': 'application/json'}})
           .then(newUser => {

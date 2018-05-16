@@ -5,13 +5,13 @@
     <li v-for="(link, i) in links" :key="`link${i}`">
       <a :href="link.url">{{link.text}}</a>
     </li>
-    <li v-if="!isLoggedIn" v-for="(link, i) in publicLinks" :key="`public${i}`">
+    <li v-if="!currentUser" v-for="(link, i) in publicLinks" :key="`public${i}`">
       <a :href="link.url">{{link.text}}</a>
     </li>
-    <li v-if="isLoggedIn" v-for="(link, i) in authLinks" :key="`auth${i}`">
+    <li v-if="currentUser" v-for="(link, i) in authLinks" :key="`auth${i}`">
       <a :href="link.url">{{link.text}}</a>
     </li>
-    <li v-if="isLoggedIn">
+    <li v-if="currentUser">
       <a href="#" @click="logout">Logout</a>
     </li>
   </ul>
@@ -28,39 +28,39 @@ export default {
   data() {
     return {
       header: 'GoodQuotes',
-        links: [{
-            url: '#/',
-            text: 'Home',
-          },
-          {
-            url: '#/developer',
-            text: 'Developer',
-          }],
-        authLinks: [
-          {
-            url: '#/search',
-            text: 'SearchQuote',
-          },
-          {
-            url: '#/smartquote',
-            text: 'SmartQuote',
-          }],
-        publicLinks: [
-          {
-            url: '#/login',
-            text: 'Login',
-          },
-          {
-            url: '#/register',
-            text: 'Register',
-          }],
+      links: [{
+          url: '#/',
+          text: 'Home',
+        },
+        {
+          url: '#/developer',
+          text: 'Developer',
+        }],
+      authLinks: [
+        {
+          url: '#/search',
+          text: 'SearchQuote',
+        },
+        {
+          url: '#/smartquote',
+          text: 'SmartQuote',
+        }],
+      publicLinks: [
+        {
+          url: '#/login',
+          text: 'Login',
+        },
+        {
+          url: '#/register',
+          text: 'Register',
+        }],
     };
   },
   methods: {
     ...Vuex.mapActions(["logout"])
   },
   computed: {
-    ...Vuex.mapGetters(["isLoggedIn"])
+    ...Vuex.mapGetters(["isLoggedIn", "currentUser"])
   }
 };
 
