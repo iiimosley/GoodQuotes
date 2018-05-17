@@ -24,7 +24,6 @@ module.exports.addUserQuote = (req, res, next) => {
           user_id: req.body.uid,
           quote_id: newQuote.dataValues.id
         }).then(newQ => {
-          console.log(newQ);
           res.status(201).json(newQ)
         });
       });
@@ -33,7 +32,6 @@ module.exports.addUserQuote = (req, res, next) => {
         user_id: req.body.uid,
         quote_id: rsp.dataValues.id
       }).then(newQ => {
-        console.log(newQ);
         res.status(201).json(newQ)
       });;
     }

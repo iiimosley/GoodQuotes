@@ -88,11 +88,12 @@ export default {
           author: e.path[3].children[1].children[0].innerText,
           uid: +this.$store.state.currentUser
         }).then(newQ=>{
-          console.log(newQ);
+          // console.log(newQ);
+          this.$store.commit('pushQuote', e.path[3].children[0].innerText)
           e.path[0].src = 'dist/goldstar.png'
         });
       } else {
-        console.log('get outta here')
+        // this.$store.commit('pushQuote', e.path[3].children[0].innerText)
         e.path[0].src = 'dist/star.png';
       }
     }
