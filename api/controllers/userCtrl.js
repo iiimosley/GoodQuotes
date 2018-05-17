@@ -11,7 +11,7 @@ module.exports.checkQuote = (req, res, next) => {
   }).then(quotes=>res.status(200).json(quotes));
 };
 
-module.exports.addUserQuote = (req, rsp, next) => {
+module.exports.addUserQuote = (req, res, next) => {
   const { User_Quote, Quote } = req.app.get("models");
   Quote.findOne({ where: { content: req.body.content } })
   .then(rsp => {
@@ -23,13 +23,19 @@ module.exports.addUserQuote = (req, rsp, next) => {
         User_Quote.create({
           user_id: req.body.uid,
           quote_id: newQuote.dataValues.id
+        }).then(newQ => {
+          console.log(newQ);
+          res.status(201).json(newQ)
         });
       });
     } else {
       User_Quote.create({
         user_id: req.body.uid,
         quote_id: rsp.dataValues.id
-      });
+      }).then(newQ => {
+        console.log(newQ);
+        res.status(201).json(newQ)
+      });;
     }
   });
 };

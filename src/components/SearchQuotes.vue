@@ -69,7 +69,7 @@ export default {
             axios.post(`${this.$store.state.devEnv}/user-tag`, {
               uid: +this.$store.state.currentUser,
               tag: this.searchContent
-            })
+            });
           }
         })
         .catch(e => {
@@ -81,11 +81,20 @@ export default {
        }
     },
     quoteAction: function (e){
-      axios.post(`${this.$store.state.devEnv}/user-quote`, {
-        content: e.path[3].children[0].innerText,
-        author: e.path[3].children[1].children[0].innerText,
-        uid: +this.$store.state.currentUser
-      })
+      if(e.path[0].src.includes('dist/star.png')){
+        console.log('gonna be gold')
+        axios.post(`${this.$store.state.devEnv}/user-quote`, {
+          content: e.path[3].children[0].innerText,
+          author: e.path[3].children[1].children[0].innerText,
+          uid: +this.$store.state.currentUser
+        }).then(newQ=>{
+          console.log(newQ);
+          e.path[0].src = 'dist/goldstar.png'
+        });
+      } else {
+        console.log('get outta here')
+        e.path[0].src = 'dist/star.png';
+      }
     }
   },
   watch: {

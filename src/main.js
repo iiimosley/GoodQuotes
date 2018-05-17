@@ -39,6 +39,9 @@ const store = new Vuex.Store({
     },
     saveQuotes(state, qs) {
       state.userQuotes = qs
+    },
+    pushQuote(state, q) {
+      state.userQuotes.push(q);
     }
   },
   actions: {

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Quote = sequelize.define('Quote', {
-    content: DataTypes.STRING,
+    content: DataTypes.TEXT,
     author: DataTypes.STRING
   }, { tableName: "quotes", timestamps: false });
   Quote.associate = function(models) {
