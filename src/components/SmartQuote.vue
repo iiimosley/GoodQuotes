@@ -1,8 +1,10 @@
 <template>
 <div id="smartContainer">
   <div id="smartSearch">
-    <p>powered by:</p>
-    <img src="../assets/watson.png" />
+    <div id="ibmAd">
+      <p>Powered by:</p>
+      <img src="../assets/watson.png" />
+    </div>
     <button id="smartBtn" @click="watsonPost()">{{msg}}</button>
   </div>
   <div class="output" v-if="smartRtn">
@@ -60,18 +62,23 @@ export default {
 #smartSearch{
   width: 95%;
   margin: 2em auto;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
-#smartSearch>img {
+#ibmAd {
+  margin: .5em auto;
+  width: 70%;
+}
+
+#ibmAd>img {
   display: block;
   margin: auto;
   width: 80%;
   height: auto;
 }
 
-#smartSearch>p {
-  margin: .2em 0 0 1.3em;
+#ibmAd>p {
+  margin: .2em 0 .4em 1.3em;
 }
 
 .output {
@@ -81,7 +88,7 @@ export default {
 
 #smartQ {
   width: 85%;
-  padding-top: 2.6em;
+  padding-top: 2.1em;
   font-size: 1.2em;
 }
 
@@ -93,7 +100,7 @@ export default {
 #smartBtn {
     display: block;
     border: none;
-    margin: 2.5em auto;
+    margin: 2em auto;
     padding: .3em 1.2em;
     font: inherit;
     font-size: 1.2em;
