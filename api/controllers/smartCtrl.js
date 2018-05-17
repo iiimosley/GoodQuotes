@@ -20,12 +20,9 @@ module.exports.getSmartQuote = (req,res,next) => {
       res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
 
       let parameters = {
-        'text': concatQ,
+        'html': concatQ,
         'features': {
-          'keywords': {
-            'emotion': true,
-            'sentiment': true,
-          }
+          'keywords': {}
         }
       };
 
@@ -33,6 +30,7 @@ module.exports.getSmartQuote = (req,res,next) => {
         if (err) {
           res.status(404).json({ msg: 'Could not retrieve SmartQuote. Please try again.' })
         } else {
+          console.log(response);
           res.status(200).json(response);
         }
       });

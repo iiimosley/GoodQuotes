@@ -1,17 +1,9 @@
 <template>
 <div id="registerForm">
-  <div>
-  <label for="regEmail">Email</label>
-  <input type="text" v-model="account.email" id="regEmail"/>
-  </div>
-  <div>
-  <label for="regPassword">Password</label>
-  <input type="text" v-model="account.password" id="regPassword"/>
-  </div>
-  <div>
-  <label for="regPasswordConfirm">Confirm</label>
-  <input type="text" v-model="account.confirm" id="regPasswordConfirm"/>
-  </div>
+  <h2>Create an Account</h2>
+  <input placeholder="Email" type="text" v-model="account.email" id="regEmail"/>
+  <input placeholder="Password" type="password" v-model="account.password" id="regPassword"/>
+  <input placeholder="Confirm" type="password" v-model="account.confirm" id="regPasswordConfirm"/>
   <button @click="submitUser()">Register</button>
   <p id="regErr" v-if="error">{{errMsg}}</p>
 </div>
@@ -69,7 +61,14 @@ export default {
 
 #registerForm{
   max-width: 300px;
-  margin: 3em auto;
+  margin: 5em auto;
+}
+
+h2 {
+  font-family: 'Merriweather', Helvetica, sans-serif;
+  font-weight: 200;
+  text-align: center;
+  margin: 1.4em auto;
 }
 
 button {
@@ -79,6 +78,15 @@ button {
 
 #regErr {
   color: red;
+}
+
+input {
+  display: block;
+  text-align: center;
+  margin: 1em auto;
+  font-size: 1.05em;
+  width: 100%;
+  padding: .2em;
 }
 
 

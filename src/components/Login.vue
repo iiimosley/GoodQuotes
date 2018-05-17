@@ -1,5 +1,6 @@
 <template>
-<div>
+<div id="loginContainer">
+<h2>Login to your Account</h2>
 <form @submit.prevent="login()">
   <input type="text" placeholder="email" v-model="account.email">
   <input type="password" placeholder="password" v-model="account.password">
@@ -50,19 +51,36 @@ export default {
 
 <style scoped>
 
+#loginContainer {
+  margin: 5em auto;
+}
+
+h2 {
+  font-family: 'Merriweather', Helvetica, sans-serif;
+  font-weight: 200;
+  text-align: center;
+}
+
 form {
   max-width: 250px;
-  margin: 3em auto;
+  margin: 2em auto;
 }
 
 form>*{
   display: block;
+  text-align: center;
   width: 100%;
   margin: 1em auto;
 }
 
 #loginErr {
   color: red;
+}
+
+input {
+  font-size: 1.05em;
+  width: 100%;
+  padding: .2em;
 }
 
 </style>
