@@ -69,7 +69,7 @@ form {
   margin: 2em auto;
 }
 
-form>*{
+form>input{
   display: block;
   text-align: center;
   width: 100%;
@@ -78,10 +78,6 @@ form>*{
 
 #loginErr {
   color: red;
-}
-
-#loginBtn{
-  margin: 2.5em auto;
 }
 
 input {
@@ -94,7 +90,7 @@ input {
     display: block;
     border: none;
     margin: 2.5em auto;
-    padding: .3em 1.2em;
+    padding: .3em 2.3em;
     font: inherit;
     font-size: 1.2em;
     text-align: center;

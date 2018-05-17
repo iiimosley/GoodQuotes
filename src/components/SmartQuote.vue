@@ -35,15 +35,19 @@ export default {
   components: {Quote, Btn},
   methods: {
     watsonPost() {
-      console.log('hittinhg it');
+      this.error = false;
+      this.errorMsg = '';
       axios.post(`${this.$store.state.devEnv}/smart`, { uid: this.$store.state.currentUser })
       .then(res=>{
-        this.error = false;
         axios.get(`${this.$store.state.devEnv}/tag/${res.data.keywords[randInt(res.data.keywords.length)].text.split(' ')[0]}`)
         .then(smartQs => {
             this.smartRtn = true
             this.output = smartQs.data.quotes[randInt(smartQs.data.quotes.length)];
-        })
+        }).catch(err=>{
+          this.smartRtn = false
+          this.error = true;
+          this.errorMsg = 'Could not retrieve SmartQuote, please try again';
+        });
       }).catch(err=> {
         this.error = true;
         this.errorMsg = err.response.data.msg;
