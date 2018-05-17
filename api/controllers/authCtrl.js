@@ -15,7 +15,7 @@ module.exports.register = (req, res, next) => {
         res.status(200).json(newUser);
       });
     } else {
-      console.log('bummer, its a match');
+      res.status(401).json({ msg: 'Current email is already in use' });
     }
   });
 };
