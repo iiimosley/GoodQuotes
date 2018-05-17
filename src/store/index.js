@@ -50,7 +50,7 @@ export default new Vuex.Store({
           localStorage.setItem("token", "JWT");
           commit(LOGIN_SUCCESS);
           resolve();
-        }, 1000);
+        }, 500);
       });
     },
     logout({ commit }) {

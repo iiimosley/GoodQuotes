@@ -20,6 +20,7 @@
 <script> 
 
 import axios from 'axios';
+import router from '../router';
 
 export default {
   name: 'Register',
@@ -49,7 +50,7 @@ export default {
               password: this.account.password
             }).then(res => {
               console.log(this.$store.state.currentUser);
-              this.$router.push('/');
+              router.push('/');
             });
         })
         .catch(e => this.errors.push(e));
