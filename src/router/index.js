@@ -6,6 +6,7 @@ import SmartQuote from '../components/SmartQuote';
 import Developer from '../components/Developer';
 import Register from '../components/Register';
 import Login from '../components/Login';
+import store from '../store';
 
 Vue.use(Router);
 
@@ -20,21 +21,49 @@ export default new Router({
       path: '/search',
       name: 'SearchQuotes',
       component: SearchQuotes,
+      beforeEnter: (to, from, next) => {
+        if (store.state.currentUser) {
+          next();
+        } else {
+          next('/');
+        }
+      }
     },
     {
       path: '/smartquote',
       name: 'SmartQuote',
       component: SmartQuote,
+      beforeEnter: (to, from, next) => { 
+        if (store.state.currentUser){
+          next();
+        } else {
+          next('/');
+        }
+      }
     },
     {
       path: '/login',
       name: 'Login',
       component: Login,
+      beforeEnter: (to, from, next) => {
+        if (!store.state.currentUser) {
+          next();
+        } else {
+          next('/');
+        }
+      }
     },
     {
       path: '/register',
       name: 'Register',
       component: Register,
+      beforeEnter: (to, from, next) => {
+        if (!store.state.currentUser) {
+          next();
+        } else {
+          next('/');
+        }
+      }
     },
     {
       path: '/developer',

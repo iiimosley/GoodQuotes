@@ -12,7 +12,7 @@
       <a :href="link.url">{{link.text}}</a>
     </li>
     <li v-if="currentUser">
-      <a href="#" @click="logout">Logout</a>
+      <a href="#/" @click="logout">Logout</a>
     </li>
   </ul>
 </div>
@@ -74,6 +74,7 @@ div {
 
 h1 {
   text-align: center;
+  font-size: 2.6em;
   letter-spacing: .1em;
   margin: 0;
   padding: .8em;
@@ -81,6 +82,7 @@ h1 {
 
 a {
   text-decoration: none;
+  font-size: 1.15em;
   color: inherit;
   transition: all .18s;
 }
@@ -95,7 +97,7 @@ ul {
 
 li {
   display: inline-block;
-  width: 20%;
+  width: 18%;
   text-align: center
 }
 

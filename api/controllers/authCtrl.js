@@ -15,7 +15,7 @@ module.exports.register = (req, res, next) => {
         res.status(200).json(newUser);
       });
     } else {
-      console.log('bummer, its a match');
+      res.status(401).json({ msg: 'Current email is already in use' });
     }
   });
 };
@@ -24,11 +24,14 @@ module.exports.login = (req, res, next) => {
   const User = req.app.get("models").User;
   User.findOne({ where: { email: req.body.email } })
   .then(authUser => {
-    if(!authUser) console.log('no matching user');
-    if (bCrypt.compareSync(req.body.password, authUser.password)){
-      res.status(200).json(authUser);
+    if(!authUser) {
+      res.status(400).json({msg: 'Current login is not registered'});
     } else {
-      console.log('not a matching password');
+      if (bCrypt.compareSync(req.body.password, authUser.password)){
+        res.status(200).json(authUser);
+      } else {
+        res.status(401).json({ msg: 'Incorrect password' });
+      }
     }
   }).catch(err=>{
     console.log(err);

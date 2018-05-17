@@ -61,10 +61,15 @@ export default {
 
 <style scoped>
 
+h2 {
+  padding-left: 1.3em;
+}
+
 h3 {
   font-style: italic;
+  text-align: left;
   letter-spacing: .2em;
-  margin-bottom: 1.4em;
+  margin: 2em 0 1.4em 1.2em;
 }
 
 .query{
@@ -74,7 +79,7 @@ h3 {
 
 .mainWrap {
   padding: 1em;
-  max-width: 600px;
+  max-width: 400px;
 }
 
 </style>

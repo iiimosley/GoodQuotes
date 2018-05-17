@@ -69,7 +69,7 @@ export default {
             axios.post(`${this.$store.state.devEnv}/user-tag`, {
               uid: +this.$store.state.currentUser,
               tag: this.searchContent
-            })
+            });
           }
         })
         .catch(e => {
@@ -81,11 +81,25 @@ export default {
        }
     },
     quoteAction: function (e){
-      axios.post(`${this.$store.state.devEnv}/user-quote`, {
-        content: e.path[3].children[0].innerText,
-        author: e.path[3].children[1].children[0].innerText,
-        uid: +this.$store.state.currentUser
-      })
+      if(e.path[0].src.includes('dist/star.png')){
+        axios.post(`${this.$store.state.devEnv}/user-quote`, {
+          content: e.path[3].children[0].innerText,
+          author: e.path[3].children[1].children[0].innerText,
+          uid: +this.$store.state.currentUser
+        }).then(newQ=>{
+          // console.log(newQ);
+          this.$store.commit('pushQuote', e.path[3].children[0].innerText)
+          e.path[0].src = 'dist/goldstar.png'
+        });
+      } else if (e.path[0].src.includes('goldstar')) {
+        axios.post(`${this.$store.state.devEnv}/user-quote?_method=DELETE`, {
+          content: e.path[3].children[0].innerText,
+          uid: +this.$store.state.currentUser
+        }).then(rmQ=> {
+          this.$store.commit('rmQuote', e.path[3].children[0].innerText);
+          e.path[0].src = 'dist/star.png';
+        })
+      }
     }
   },
   watch: {
