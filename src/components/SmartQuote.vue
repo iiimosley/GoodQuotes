@@ -1,11 +1,12 @@
 <template>
 <div id="smartContainer">
   <div id="smartSearch">
-    <textarea v-model="content"></textarea>
+    <p>powered by:</p>
+    <img src="../assets/watson.png" />
     <button @click="watsonPost()">{{msg}}</button>
   </div>
   <div class="output" v-if="smartRtn">
-    <Quote :quote="output.quote" :author="output.author" :title="output.publication" ></Quote>
+    <Quote id="smartQ" :quote="output.quote" :author="output.author" :title="output.publication" ></Quote>
   </div>
 </div>
 </template>
@@ -30,19 +31,12 @@ export default {
     watsonPost() {
       axios.post(`${this.$store.state.devEnv}/smart`, { uid: this.$store.state.currentUser })
       .then(res=>{
-        // console.log(res.data.keywords[randInt(res.data.keywords.length)].text.split(' ')[0]);
         axios.get(`${this.$store.state.devEnv}/tag/${res.data.keywords[randInt(res.data.keywords.length)].text.split(' ')[0]}`)
         .then(smartQs => {
             this.smartRtn = true
             this.output = smartQs.data.quotes[randInt(smartQs.data.quotes.length)];
         })
       }).catch(err=>console.log(err.response.data.msg));
-      // .then(res => axios.get(`${this.$store.state.devEnv}/tag/${res.data.keywords[randInt(res.data.keywords.length)].text}`))
-      // .then(smartQs => {
-      //     this.smartRtn = true
-      //     this.output = smartQs.data.quotes[randInt(smartQs.data.quotes.length)];
-      //   })
-      // .catch(err => console.log(err));
     }
   }
 };
@@ -50,7 +44,7 @@ export default {
 
 <style scoped>
 #smartContainer {
-  max-width: 420px;
+  max-width: 700px;
   margin: 1em auto;
 }
 
@@ -59,19 +53,29 @@ export default {
   margin: auto;
   border: 1px solid black;
 }
-#smartSearch>*{
+#smartSearch>button{
   display: block;
   margin: 1em auto;
 }
-#smartSearch>textarea {
-  width: 90%;
-  height: 140px;
+
+#smartSearch>img {
+  display: block;
+  margin: auto;
+  width: 80%;
+  height: auto;
+}
+
+#smartSearch>p {
+  margin: .2em 0 0 1.3em;
 }
 
 .output {
-  width: 70%;
   margin: 2em auto;
   text-align: center;
+}
+
+#smartQ {
+  width: 80%;
 }
 
 </style>

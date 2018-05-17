@@ -31,10 +31,9 @@ module.exports.getSmartQuote = (req,res,next) => {
 
       natural_language_understanding.analyze(parameters, (err, response) => {
         if (err) {
-          console.log('error:', err);
+          res.status(404).json({ msg: 'Could not retrieve SmartQuote. Please try again.' })
         } else {
-          console.log(JSON.stringify(response, null));
-          return res.status(200).json(response);
+          res.status(200).json(response);
         }
       });
     } else {
