@@ -1,13 +1,11 @@
 <template>
-<div>
-  <button class='styleBtn'>{{title}}</button>
-</div>
+  <button class='styleBtn' >{{title}}</button>
 </template>
 
 <script>
 export default {
-  name: 'AnimBtn',
-  props: ['title']
+  name: 'Btn',
+  props: ['title','onClick']
 }
 </script>
 
@@ -17,9 +15,9 @@ export default {
     display: block;
     border: none;
     margin: 1em auto;
-    padding: .4em 1.2em;
+    padding: .3em 1.2em;
     font: inherit;
-    font-size: 1.3em;
+    font-size: 1.2em;
     text-align: center;
     letter-spacing: .2em;
     cursor: pointer;

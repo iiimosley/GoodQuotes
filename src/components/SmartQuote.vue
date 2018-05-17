@@ -3,7 +3,7 @@
   <div id="smartSearch">
     <p>powered by:</p>
     <img src="../assets/watson.png" />
-    <button @click="watsonPost()">{{msg}}</button>
+    <button id="smartBtn" @click="watsonPost()">{{msg}}</button>
   </div>
   <div class="output" v-if="smartRtn">
     <Quote id="smartQ" :quote="output.quote" :author="output.author" :title="output.publication" ></Quote>
@@ -16,6 +16,7 @@
 import axios from 'axios';
 import randInt from '../services/randomNum';
 import Quote from './partials/Quote';
+import Btn from './partials/Btn';
 
 export default {
   name: 'Home',
@@ -29,9 +30,10 @@ export default {
       errorMsg: ''
     };
   },
-  components: {Quote},
+  components: {Quote, Btn},
   methods: {
     watsonPost() {
+      console.log('hittinhg it');
       axios.post(`${this.$store.state.devEnv}/smart`, { uid: this.$store.state.currentUser })
       .then(res=>{
         this.error = false;
@@ -60,10 +62,6 @@ export default {
   margin: 2em auto;
   border: 1px solid black;
 }
-#smartSearch>button{
-  display: block;
-  margin: 1em auto;
-}
 
 #smartSearch>img {
   display: block;
@@ -91,5 +89,33 @@ export default {
   color: red;
   text-align: center;
 }
+
+#smartBtn {
+    display: block;
+    border: none;
+    margin: 2.5em auto;
+    padding: .3em 1.2em;
+    font: inherit;
+    font-size: 1.2em;
+    text-align: center;
+    letter-spacing: .2em;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid black;
+    border-radius: .3em;
+    box-shadow: 0 0.3em;
+    transform: translateY(-0.3em);
+    transition: all .2s;
+}
+#smartBtn:hover {
+    box-shadow: 0 0.2em black;
+    transform: translateY(-0.2em);
+}
+#smartBtn:active{
+    box-shadow: 0 .1em .2em black;
+    transform: translateY(-0.03em);
+}
+
+
 
 </style>

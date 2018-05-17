@@ -1,10 +1,10 @@
 <template>
 <div id="loginContainer">
-<h2>Login to your Account</h2>
 <form @submit.prevent="login()">
+  <h2>Login to your Account</h2>
   <input type="text" placeholder="email" v-model="account.email">
   <input type="password" placeholder="password" v-model="account.password">
-  <Btn id="loginBtn" type="submit" :title="btnName" @click="submitUser()"></Btn>
+  <button id="loginBtn" type="submit" @click="login()">{{btnName}}</button>
   <p id="loginErr" if="error">{{errorMsg}}</p>
 </form>
 </div>
@@ -65,7 +65,7 @@ h2 {
 }
 
 form {
-  max-width: 250px;
+  max-width: 300px;
   margin: 2em auto;
 }
 
@@ -88,6 +88,32 @@ input {
   font-size: 1.05em;
   width: 100%;
   padding: .2em;
+}
+
+#loginBtn {
+    display: block;
+    border: none;
+    margin: 2.5em auto;
+    padding: .3em 1.2em;
+    font: inherit;
+    font-size: 1.2em;
+    text-align: center;
+    letter-spacing: .2em;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid black;
+    border-radius: .3em;
+    box-shadow: 0 0.3em;
+    transform: translateY(-0.3em);
+    transition: all .2s;
+}
+#loginBtn:hover {
+    box-shadow: 0 0.2em black;
+    transform: translateY(-0.2em);
+}
+#loginBtn:active{
+    box-shadow: 0 .1em .2em black;
+    transform: translateY(-0.03em);
 }
 
 </style>

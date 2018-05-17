@@ -4,8 +4,8 @@
   <input placeholder="Email" type="text" v-model="account.email" id="regEmail"/>
   <input placeholder="Password" type="password" v-model="account.password" id="regPassword"/>
   <input placeholder="Confirm" type="password" v-model="account.confirm" id="regPasswordConfirm"/>
-  <Btn id="regBtn" :title="btnName" @click="submitUser()"></Btn>
-  <p id="regErr" v-if="error">{{errMsg}}</p>
+  <button id="regBtn" @click="submitUser()">{{btnName}}</button>
+  <p id="regErr" v-if="error" >{{errMsg}}</p>
 </div>
 </template>
 
@@ -74,11 +74,6 @@ h2 {
   margin: 1.4em auto;
 }
 
-#regBtn {
-  margin: 2.5em auto; 
-  width: 100%;
-}
-
 #regErr {
   color: red;
 }
@@ -90,6 +85,32 @@ input {
   font-size: 1.05em;
   width: 100%;
   padding: .2em;
+}
+
+#regBtn {
+    display: block;
+    border: none;
+    margin: 2.5em auto;
+    padding: .3em 1.2em;
+    font: inherit;
+    font-size: 1.2em;
+    text-align: center;
+    letter-spacing: .2em;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid black;
+    border-radius: .3em;
+    box-shadow: 0 0.3em;
+    transform: translateY(-0.3em);
+    transition: all .2s;
+}
+#regBtn:hover {
+    box-shadow: 0 0.2em black;
+    transform: translateY(-0.2em);
+}
+#regBtn:active{
+    box-shadow: 0 .1em .2em black;
+    transform: translateY(-0.03em);
 }
 
 
