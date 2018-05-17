@@ -11,6 +11,58 @@ The **SmartQuote** feature compiles all collected quotes by the user and process
 
 Basic access to API's webscraping features. No user features currently deployed.
 
+
+## API
+Direct access to API will be located on `localhost:8080` by default (Not directly available to development, `localhost:8081` || Global conditionals in place to run API queries in both environments)
+
+All initial queries need a `+` separated between each word
+
++ Example: `/author/george+r+r+martin`
+
+Query for additional pages with `?page=#`
+
+Example: `/title/brave+new+world?page=3`
+
+**Search by Tag**
+
+Query: `/tag/...`
+
+Example: `/tag/wisdom`
+
+**Search by Author**
+
+Query: `/author/...`
+
+Example: `/author/tom+robbins`
+
+**Search by Title**
+
+Query: `/title/...`
+
+Example: `/title/crime+and+punishment`
+
+## User Features
+Upon Login/Registration, users have access to: 
+
+**Searching+saving quotes:** 
++ Starring quotes adds the quote to the database
+  + If quote already exists in DB, new row will be created on `User_Quotes` containing selected `quote_id` and current `user_id`
+  + If quote does not exist in DB, new row will be created on `Quotes` tablefor the starred quote. Then, a new row is created on `User_Quotes` containing the new `quote_id` and the current `user_id`
++ Unstarring quotes removes the `User_Quotes` row from the database
+  + The `quote_id` will be selected based upon the contents of the quote unstarred
+  + The row containing the selected `quote_id` and current `user_id` will be removed from `User_Quotes` table
+
+**SmartQuote generator:**
+
+SmartQuote feature 
+1. Compiles all quotes correlated to the current `user_id`
+1. Concatenates all quotes to one string
+1. Processes the string through **IBM Watson NLU** 
+1. Randomly selects a keyword from the Watson return 
+1. Runs the selected keyword through the GoodQuotes API tag query 
+1. Randomly selects and quote from the returned GoodQuotes query
+1. Renders the selected quote to the SmartQuote page
+
 ### To Run Locally:
 First, clone this repo
 ```
@@ -65,35 +117,6 @@ Run the initial server
 ```
 $ npm start
 ```
-
-### API
-Direct access to API will be located on `localhost:8080` by default (Not directly available to development, `localhost:8081` || Global conditionals in place to run API queries in both environments)
-
-All initial queries need a `+` separated between each word
-
-+ Example: `/author/george+r+r+martin`
-
-Query for additional pages with `?page=#`
-
-Example: `/title/brave+new+world?page=3`
-
-**Search by Tag**
-
-Query: `/tag/...`
-
-Example: `/tag/wisdom`
-
-**Search by Author**
-
-Query: `/author/...`
-
-Example: `/author/tom+robbins`
-
-**Search by Title**
-
-Query: `/title/...`
-
-Example: `/title/crime+and+punishment`
 
 ## Technologies Utilized
 - [Node](https://nodejs.org/): Chrome V8 Runtime Environemnt
