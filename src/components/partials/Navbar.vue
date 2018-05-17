@@ -77,7 +77,7 @@ h1 {
   font-size: 2.6em;
   letter-spacing: .1em;
   margin: 0;
-  padding: .8em;
+  padding: 1em .6em .6em;
 }
 
 a {

@@ -1,19 +1,11 @@
 <template>
 <div id="registerForm">
-  <div>
-  <label for="regEmail">Email</label>
-  <input type="text" v-model="account.email" id="regEmail"/>
-  </div>
-  <div>
-  <label for="regPassword">Password</label>
-  <input type="text" v-model="account.password" id="regPassword"/>
-  </div>
-  <div>
-  <label for="regPasswordConfirm">Confirm</label>
-  <input type="text" v-model="account.confirm" id="regPasswordConfirm"/>
-  </div>
-  <button @click="submitUser()">Register</button>
-  <p id="regErr" v-if="error">{{errMsg}}</p>
+  <h2>Create an Account</h2>
+  <input placeholder="Email" type="text" v-model="account.email" id="regEmail"/>
+  <input placeholder="Password" type="password" v-model="account.password" id="regPassword"/>
+  <input placeholder="Confirm" type="password" v-model="account.confirm" id="regPasswordConfirm"/>
+  <button id="regBtn" @click="submitUser()">{{btnName}}</button>
+  <p id="regErr" v-if="error" >{{errMsg}}</p>
 </div>
 </template>
 
@@ -21,10 +13,12 @@
 
 import axios from 'axios';
 import router from '../router';
+import Btn from './partials/Btn';
 
 export default {
   name: 'Register',
   props: ['user', 'auth'],
+  components: {Btn},
   data() {
     return {
       account: {
@@ -33,7 +27,8 @@ export default {
         confirm: ''
       },
       error: false,
-      errMsg: ''
+      errMsg: '',
+      btnName: 'Register'
     };
   },
   methods: {
@@ -69,16 +64,53 @@ export default {
 
 #registerForm{
   max-width: 300px;
-  margin: 3em auto;
+  margin: 5em auto;
 }
 
-button {
-  display: block;  
-  margin: 1em auto; 
+h2 {
+  font-family: 'Merriweather', Helvetica, sans-serif;
+  font-weight: 200;
+  text-align: center;
+  margin: 1.4em auto;
 }
 
 #regErr {
   color: red;
+}
+
+input {
+  display: block;
+  text-align: center;
+  margin: 1em auto;
+  font-size: 1.05em;
+  width: 100%;
+  padding: .2em;
+}
+
+#regBtn {
+    display: block;
+    border: none;
+    margin: 2.5em auto;
+    padding: .3em 1.2em;
+    font: inherit;
+    font-size: 1.2em;
+    text-align: center;
+    letter-spacing: .2em;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid black;
+    border-radius: .3em;
+    box-shadow: 0 0.3em;
+    transform: translateY(-0.3em);
+    transition: all .2s;
+}
+#regBtn:hover {
+    box-shadow: 0 0.2em black;
+    transform: translateY(-0.2em);
+}
+#regBtn:active{
+    box-shadow: 0 .1em .2em black;
+    transform: translateY(-0.03em);
 }
 
 
