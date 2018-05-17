@@ -81,8 +81,6 @@ h1 {
 }
 
 a {
-  font-family: 'Merriweather', Helvetica, sans-serif;
-  font-weight: 200;
   text-decoration: none;
   font-size: 1.15em;
   color: inherit;

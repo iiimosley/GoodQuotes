@@ -4,7 +4,7 @@
 <form @submit.prevent="login()">
   <input type="text" placeholder="email" v-model="account.email">
   <input type="password" placeholder="password" v-model="account.password">
-  <button type="submit">Login</button>
+  <Btn id="loginBtn" type="submit" :title="btnName" @click="submitUser()"></Btn>
   <p id="loginErr" if="error">{{errorMsg}}</p>
 </form>
 </div>
@@ -13,8 +13,10 @@
 <script> 
 
 import axios from 'axios';
+import Btn from './partials/Btn';
 
 export default {
+  components: {Btn},
   data() {
     return {
       account: {
@@ -22,7 +24,8 @@ export default {
         password: ''
       },
       error: false,
-      errorMsg: ''
+      errorMsg: '',
+      btnName: 'Login'
     }
   },
   methods: {
@@ -75,6 +78,10 @@ form>*{
 
 #loginErr {
   color: red;
+}
+
+#loginBtn{
+  margin: 2.5em auto;
 }
 
 input {

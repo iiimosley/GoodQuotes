@@ -4,7 +4,7 @@
   <input placeholder="Email" type="text" v-model="account.email" id="regEmail"/>
   <input placeholder="Password" type="password" v-model="account.password" id="regPassword"/>
   <input placeholder="Confirm" type="password" v-model="account.confirm" id="regPasswordConfirm"/>
-  <button @click="submitUser()">Register</button>
+  <Btn id="regBtn" :title="btnName" @click="submitUser()"></Btn>
   <p id="regErr" v-if="error">{{errMsg}}</p>
 </div>
 </template>
@@ -13,10 +13,12 @@
 
 import axios from 'axios';
 import router from '../router';
+import Btn from './partials/Btn';
 
 export default {
   name: 'Register',
   props: ['user', 'auth'],
+  components: {Btn},
   data() {
     return {
       account: {
@@ -25,7 +27,8 @@ export default {
         confirm: ''
       },
       error: false,
-      errMsg: ''
+      errMsg: '',
+      btnName: 'Register'
     };
   },
   methods: {
@@ -71,9 +74,9 @@ h2 {
   margin: 1.4em auto;
 }
 
-button {
-  display: block;  
-  margin: 1em auto; 
+#regBtn {
+  margin: 2.5em auto; 
+  width: 100%;
 }
 
 #regErr {
