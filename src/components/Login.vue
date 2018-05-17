@@ -4,6 +4,7 @@
   <input type="text" placeholder="email" v-model="account.email">
   <input type="password" placeholder="password" v-model="account.password">
   <button type="submit">Login</button>
+  <p if="error">{{errorMsg}}</p>
 </form>
 </div>
 </template>
@@ -19,7 +20,8 @@ export default {
         email: '',
         password: ''
       },
-      error: false
+      error: false,
+      errorMsg: ''
     }
   },
   methods: {
@@ -36,6 +38,10 @@ export default {
           this.$router.push('/');
         });
       })
+      .catch(err=> {
+        this.error = true;
+        this.errorMsg = err.response.data.msg;
+      });
     },
   }
 }

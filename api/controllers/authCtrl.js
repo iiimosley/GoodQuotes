@@ -24,11 +24,11 @@ module.exports.login = (req, res, next) => {
   const User = req.app.get("models").User;
   User.findOne({ where: { email: req.body.email } })
   .then(authUser => {
-    if(!authUser) console.log('no matching user');
+    if(!authUser) res.status(400).json({msg: 'Current email is not registered'});
     if (bCrypt.compareSync(req.body.password, authUser.password)){
       res.status(200).json(authUser);
     } else {
-      console.log('not a matching password');
+      res.status(401).json({ msg: 'Incorrect password' });
     }
   }).catch(err=>{
     console.log(err);
