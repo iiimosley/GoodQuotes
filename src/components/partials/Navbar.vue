@@ -12,7 +12,7 @@
       <a :href="link.url">{{link.text}}</a>
     </li>
     <li v-if="currentUser">
-      <a href="#" @click="logout">Logout</a>
+      <a href="#/" @click="logout">Logout</a>
     </li>
   </ul>
 </div>
