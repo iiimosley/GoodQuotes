@@ -82,7 +82,6 @@ export default {
     },
     quoteAction: function (e){
       if(e.path[0].src.includes('dist/star.png')){
-        console.log('gonna be gold')
         axios.post(`${this.$store.state.devEnv}/user-quote`, {
           content: e.path[3].children[0].innerText,
           author: e.path[3].children[1].children[0].innerText,

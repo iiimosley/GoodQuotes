@@ -79,7 +79,7 @@ h3 {
 
 .mainWrap {
   padding: 1em;
-  max-width: 600px;
+  max-width: 400px;
 }
 
 </style>

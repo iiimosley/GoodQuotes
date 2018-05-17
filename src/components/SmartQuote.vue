@@ -8,6 +8,7 @@
   <div class="output" v-if="smartRtn">
     <Quote id="smartQ" :quote="output.quote" :author="output.author" :title="output.publication" ></Quote>
   </div>
+  <p id="smartErr" if="error">{{errorMsg}}</p>
 </div>
 </template>
 
@@ -24,6 +25,8 @@ export default {
       content: '',
       smartRtn: false,
       output: {},
+      error: false,
+      errorMsg: ''
     };
   },
   components: {Quote},
@@ -31,12 +34,16 @@ export default {
     watsonPost() {
       axios.post(`${this.$store.state.devEnv}/smart`, { uid: this.$store.state.currentUser })
       .then(res=>{
+        this.error = false;
         axios.get(`${this.$store.state.devEnv}/tag/${res.data.keywords[randInt(res.data.keywords.length)].text.split(' ')[0]}`)
         .then(smartQs => {
             this.smartRtn = true
             this.output = smartQs.data.quotes[randInt(smartQs.data.quotes.length)];
         })
-      }).catch(err=>console.log(err.response.data.msg));
+      }).catch(err=> {
+        this.error = true;
+        this.errorMsg = err.response.data.msg;
+      });
     }
   }
 };
@@ -50,7 +57,7 @@ export default {
 
 #smartSearch{
   width: 95%;
-  margin: auto;
+  margin: 2em auto;
   border: 1px solid black;
 }
 #smartSearch>button{
@@ -75,7 +82,14 @@ export default {
 }
 
 #smartQ {
-  width: 80%;
+  width: 85%;
+  padding-top: 2.6em;
+  font-size: 1.2em;
+}
+
+#smartErr {
+  color: red;
+  text-align: center;
 }
 
 </style>
