@@ -92,9 +92,14 @@ export default {
           this.$store.commit('pushQuote', e.path[3].children[0].innerText)
           e.path[0].src = 'dist/goldstar.png'
         });
-      } else {
-        // this.$store.commit('pushQuote', e.path[3].children[0].innerText)
-        e.path[0].src = 'dist/star.png';
+      } else if (e.path[0].src.includes('goldstar')) {
+        axios.post(`${this.$store.state.devEnv}/user-quote?_method=DELETE`, {
+          content: e.path[3].children[0].innerText,
+          uid: +this.$store.state.currentUser
+        }).then(rmQ=> {
+          this.$store.commit('rmQuote', e.path[3].children[0].innerText);
+          e.path[0].src = 'dist/star.png';
+        })
       }
     }
   },

@@ -1,5 +1,5 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+'use strict';
+
 import Vue from 'vue';
 import Vuex from 'vuex'
 import App from './App';
@@ -42,6 +42,9 @@ const store = new Vuex.Store({
     },
     pushQuote(state, q) {
       state.userQuotes.push(q);
+    },
+    rmQuote(state, q) {
+      state.userQuotes.splice(state.userQuotes.indexOf(q), 1);
     }
   },
   actions: {

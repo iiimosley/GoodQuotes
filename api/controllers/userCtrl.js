@@ -39,7 +39,17 @@ module.exports.addUserQuote = (req, res, next) => {
 };
 
 module.exports.deleteUserQuote = (req, res, next) => {
-  console.log(req.body);
+  const { User_Quote, Quote } = req.app.get("models");
+  Quote.findOne({ raw: true, where: { content: req.body.content } })
+    .then(rsp => {
+      console.log(rsp.id, req.body.uid);
+      User_Quote.destroy({
+        where: {
+          quote_id: rsp.id,
+          user_id: req.body.uid
+        }
+      }).then(rmRsp=>res.status(201).json(rmRsp));
+    });
 };
 
 module.exports.addUserTag = (req, res, next) => {
