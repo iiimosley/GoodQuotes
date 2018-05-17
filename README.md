@@ -64,9 +64,10 @@ SmartQuote feature
 1. Renders the selected quote to the SmartQuote page
 
 ### To Run Locally:
-First, clone this repo
+First, clone this repo and install packages
 ```
 $ git clone https://github.com/iiimosley/GoodQuotes.git
+$ cd GoodQuotes && npm install
 ```
 Then, instantiate the initial build.
 ```
