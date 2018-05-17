@@ -4,27 +4,42 @@ const { natural_language_understanding } = require('../config/watson-config');
 
 module.exports.getSmartQuote = (req,res,next) => {
 
-  console.log(req.body.search);
+  console.log(req.body.uid);
 
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-  
-  let parameters = {
-    'text': req.body.search,
-    'features': {
-      'keywords': {
-        'emotion': true,
-        'sentiment': true,
-      }
-    }
-  };
+  const { User_Quote, Quote } = req.app.get("models");
+  User_Quote.findAll({
+    raw: true,
+    where: {
+      user_id: req.body.uid
+    },
+    include: [{ model: Quote, attributes: ['content', 'author'] }]
+  }).then(quotes => {
+    let concatQ = quotes.map(q => q[`Quote.content`]).join(' ');
 
-  natural_language_understanding.analyze(parameters, (err, response) => {
-    if (err) {
-      console.log('error:', err);
+    if (concatQ.length > 180) {
+      res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+
+      let parameters = {
+        'text': concatQ,
+        'features': {
+          'keywords': {
+            'emotion': true,
+            'sentiment': true,
+          }
+        }
+      };
+
+      natural_language_understanding.analyze(parameters, (err, response) => {
+        if (err) {
+          console.log('error:', err);
+        } else {
+          console.log(JSON.stringify(response, null));
+          return res.status(200).json(response);
+        }
+      });
     } else {
-      console.log(JSON.stringify(response, null));
-      return res.json(response);
+      res.status(400).json({msg: 'Too few characters to complete search. Add some more quotes!'})
     }
-  });
 
+  });
 }

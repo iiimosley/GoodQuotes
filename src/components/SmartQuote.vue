@@ -28,13 +28,21 @@ export default {
   components: {Quote},
   methods: {
     watsonPost() {
-      axios.post(`${this.$store.state.devEnv}/smart`, { search: this.content })
-      .then(res => axios.get(`${this.$store.state.devEnv}/tag/${res.data.keywords[randInt(res.data.keywords.length)].text}`))
-      .then(smartQs => {
-          this.smartRtn = true
-          this.output = smartQs.data.quotes[randInt(smartQs.data.quotes.length)];
+      axios.post(`${this.$store.state.devEnv}/smart`, { uid: this.$store.state.currentUser })
+      .then(res=>{
+        // console.log(res.data.keywords[randInt(res.data.keywords.length)].text.split(' ')[0]);
+        axios.get(`${this.$store.state.devEnv}/tag/${res.data.keywords[randInt(res.data.keywords.length)].text.split(' ')[0]}`)
+        .then(smartQs => {
+            this.smartRtn = true
+            this.output = smartQs.data.quotes[randInt(smartQs.data.quotes.length)];
         })
-      .catch(err => console.log(err));
+      }).catch(err=>console.log(err.response.data.msg));
+      // .then(res => axios.get(`${this.$store.state.devEnv}/tag/${res.data.keywords[randInt(res.data.keywords.length)].text}`))
+      // .then(smartQs => {
+      //     this.smartRtn = true
+      //     this.output = smartQs.data.quotes[randInt(smartQs.data.quotes.length)];
+      //   })
+      // .catch(err => console.log(err));
     }
   }
 };
