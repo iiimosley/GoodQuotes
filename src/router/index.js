@@ -45,11 +45,25 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+      beforeEnter: (to, from, next) => {
+        if (!store.state.currentUser) {
+          next();
+        } else {
+          next('/');
+        }
+      }
     },
     {
       path: '/register',
       name: 'Register',
       component: Register,
+      beforeEnter: (to, from, next) => {
+        if (!store.state.currentUser) {
+          next();
+        } else {
+          next('/');
+        }
+      }
     },
     {
       path: '/developer',

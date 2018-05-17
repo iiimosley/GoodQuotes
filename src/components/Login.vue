@@ -4,7 +4,7 @@
   <input type="text" placeholder="email" v-model="account.email">
   <input type="password" placeholder="password" v-model="account.password">
   <button type="submit">Login</button>
-  <p if="error">{{errorMsg}}</p>
+  <p id="loginErr" if="error">{{errorMsg}}</p>
 </form>
 </div>
 </template>
@@ -61,5 +61,8 @@ form>*{
   margin: 1em auto;
 }
 
+#loginErr {
+  color: red;
+}
 
 </style>
