@@ -11,6 +11,18 @@ module.exports.checkQuote = (req, res, next) => {
   }).then(quotes=>res.status(200).json(quotes));
 };
 
+module.exports.getUserQuotes = (req, res, next) => {
+  const { User_Quote, Quote } = req.app.get("models");
+  User_Quote.findAll({
+    raw: true,
+    where: {user_id: req.params.uid},
+    include: [{ model: Quote, attributes: ['content', 'author'] }]
+  }).then(quotes => {
+    console.log(quotes);
+    res.status(200).json(quotes);
+  });
+};
+
 module.exports.addUserQuote = (req, res, next) => {
   const { User_Quote, Quote } = req.app.get("models");
   Quote.findOne({ where: { content: req.body.content } })

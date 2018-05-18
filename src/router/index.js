@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '../components/Home';
 import SearchQuotes from '../components/SearchQuotes';
 import SmartQuote from '../components/SmartQuote';
+import MyQuotes from '../components/MyQuotes';
 import Developer from '../components/Developer';
 import Register from '../components/Register';
 import Login from '../components/Login';
@@ -35,6 +36,18 @@ export default new Router({
       component: SmartQuote,
       beforeEnter: (to, from, next) => { 
         if (store.state.currentUser){
+          next();
+        } else {
+          next('/');
+        }
+      }
+    },
+    {
+      path: '/myquotes',
+      name: 'MyQuotes',
+      component: MyQuotes,
+      beforeEnter: (to, from, next) => {
+        if (store.state.currentUser) {
           next();
         } else {
           next('/');

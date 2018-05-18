@@ -38,8 +38,12 @@ export default {
         }],
       authLinks: [
         {
+          url: '#/myquotes',
+          text: 'MyQuotes',
+        },
+        {
           url: '#/search',
-          text: 'SearchQuote',
+          text: 'SearchQuotes',
         },
         {
           url: '#/smartquote',
