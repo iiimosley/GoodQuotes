@@ -1,6 +1,6 @@
 <template>
   <div id="myQuotes">
-    <Quote v-for="(qu, i) in quotes" :key="`userQuote${i}`" :quote-id="qu.id" :quote="qu[`Quote.content`]" :author="qu[`Quote.author`]" >
+    <Quote v-for="(qu, i) in quotes" :key="`userQuote${i}`" :qid="qu.id" :quote="qu[`Quote.content`]" :author="qu[`Quote.author`]" >
       <button @click="deleteQuote"></button>
     </Quote>
   </div>
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     deleteQuote: function(e) {
-      console.log('chip click', e);
+      console.log('quote-id', +e.path[2].attributes.qid.value, 'user', this.$store.state.currentUser);
     }
   },
 }
