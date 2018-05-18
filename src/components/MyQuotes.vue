@@ -26,8 +26,14 @@ export default {
   },
   methods: {
     deleteQuote: function(e) {
-      console.log('quote-id', +e.path[2].attributes.qid.value, 'user', this.$store.state.currentUser);
-      console.log('quote', e.path[2].firstChild.innerText)
+      // console.log('quote-id', +e.path[2].attributes.qid.value, 'user', this.$store.state.currentUser);
+      // console.log('quote', e.path[2].firstChild.innerText);
+        axios.post(`${this.$store.state.devEnv}/user-quote/${+e.path[2].attributes.qid.value}?_method=DELETE`, {
+          uid: +this.$store.state.currentUser
+        }).then(rmQ=> {
+          this.$store.commit('rmQuote', e.path[3].children[0].innerText);
+          e.path[0].src = 'dist/star.png';
+        })
     }
   },
 }

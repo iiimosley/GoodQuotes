@@ -64,6 +64,18 @@ module.exports.deleteUserQuote = (req, res, next) => {
     });
 };
 
+module.exports.deleteUserQuoteById = (req, res, next) => {
+  console.log(req.params.id, req.body.uid);
+  // const { User_Quote} = req.app.get("models");
+  //   User_Quote.destroy({
+  //     where: {
+  //       quote_id: req.params.id,
+  //       user_id: req.body.uid
+  //     }
+  //   }).then(rmRsp => res.status(201).json(rmRsp));
+};
+
+
 module.exports.addUserTag = (req, res, next) => {
   const { User_Tag, Tag } = req.app.get("models");
   Tag.findOne({where:{tag_content: req.body.tag}})

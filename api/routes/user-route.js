@@ -3,13 +3,15 @@
 const { Router } = require('express');
 const router = Router();
 
-const { getUserQuotes, addUserQuote, deleteUserQuote, addUserTag, checkQuote } = require("../controllers/userCtrl.js");
+const { getUserQuotes, addUserQuote, deleteUserQuote, deleteUserQuoteById, addUserTag, checkQuote } = require("../controllers/userCtrl.js");
 
 router.get('/user-quote/:uid', getUserQuotes);
 
 router.post('/user-quote', addUserQuote);
 
 router.delete('/user-quote', deleteUserQuote);
+
+router.delete('/user-quote/:id', deleteUserQuoteById);
 
 router.post('/user-tag', addUserTag);
 
