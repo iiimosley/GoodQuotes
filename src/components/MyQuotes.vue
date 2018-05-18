@@ -3,6 +3,7 @@
     <Quote v-for="(qu, i) in quotes" :key="`userQuote${i}`" :qid="qu.quote_id" :quote="qu[`Quote.content`]" :author="qu[`Quote.author`]" >
       <button @click="deleteQuote"><img src="dist/chip.png"></button>
     </Quote>
+    <p v-if="!quotes">No quotes saved. Go searching!</p>
   </div>
 </template>
 
@@ -22,7 +23,7 @@ export default {
     axios.get(`${this.$store.state.devEnv}/user-quote/${+this.$store.state.currentUser}`)
     .then(matchedQuotes => {
       this.quotes = matchedQuotes.data;
-    });
+    })
   },
   methods: {
     deleteQuote: function(e) {
@@ -43,6 +44,11 @@ export default {
 
   #myQuotes {
     margin: 2em auto;
+  }
+
+  p {
+    text-align: center;
+    color: red;
   }
 
   button {
