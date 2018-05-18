@@ -65,14 +65,14 @@ module.exports.deleteUserQuote = (req, res, next) => {
 };
 
 module.exports.deleteUserQuoteById = (req, res, next) => {
-  console.log(req.params.id, req.body.uid);
-  // const { User_Quote} = req.app.get("models");
-  //   User_Quote.destroy({
-  //     where: {
-  //       quote_id: req.params.id,
-  //       user_id: req.body.uid
-  //     }
-  //   }).then(rmRsp => res.status(201).json(rmRsp));
+  // console.log('this is in delete quote by id')
+  const { User_Quote} = req.app.get("models");
+    User_Quote.destroy({
+      where: {
+        quote_id: +req.params.id,
+        user_id: +req.body.uid
+      }
+    }).then(rmRsp => res.status(201).json(rmRsp));
 };
 
 

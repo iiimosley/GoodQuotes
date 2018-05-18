@@ -1,7 +1,7 @@
 <template>
   <div id="myQuotes">
-    <Quote v-for="(qu, i) in quotes" :key="`userQuote${i}`" :qid="qu.id" :quote="qu[`Quote.content`]" :author="qu[`Quote.author`]" >
-      <button @click="deleteQuote"></button>
+    <Quote v-for="(qu, i) in quotes" :key="`userQuote${i}`" :qid="qu.quote_id" :quote="qu[`Quote.content`]" :author="qu[`Quote.author`]" >
+      <button @click="deleteQuote"><img src="dist/chip.png"></button>
     </Quote>
   </div>
 </template>
@@ -26,14 +26,14 @@ export default {
   },
   methods: {
     deleteQuote: function(e) {
-      // console.log('quote-id', +e.path[2].attributes.qid.value, 'user', this.$store.state.currentUser);
-      // console.log('quote', e.path[2].firstChild.innerText);
-        axios.post(`${this.$store.state.devEnv}/user-quote/${+e.path[2].attributes.qid.value}?_method=DELETE`, {
-          uid: +this.$store.state.currentUser
-        }).then(rmQ=> {
-          this.$store.commit('rmQuote', e.path[3].children[0].innerText);
-          e.path[0].src = 'dist/star.png';
-        })
+      // console.log('quote-id', +e.path[3].attributes.qid.value, 'user', this.$store.state.currentUser);
+      // console.log('quote', e.path[3].firstChild.innerText);
+      axios.post(`${this.$store.state.devEnv}/user-quote/${+e.path[3].attributes.qid.value}?_method=DELETE`, {
+        uid: +this.$store.state.currentUser
+      }).then(rmQ=> {
+        this.$store.commit('rmQuote', e.path[3].firstChild.innerText);
+        e.path[3].parentNode.removeChild(e.path[3]);
+      })
     }
   },
 }
@@ -44,5 +44,22 @@ export default {
   #myQuotes {
     margin: 2em auto;
   }
+
+  button {
+  width: 40px;
+  height: auto;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+button>img{
+  width: 50%;
+  height: auto;
+}
 
 </style>
