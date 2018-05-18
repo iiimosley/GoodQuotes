@@ -27,6 +27,7 @@ export default {
   methods: {
     deleteQuote: function(e) {
       console.log('quote-id', +e.path[2].attributes.qid.value, 'user', this.$store.state.currentUser);
+      console.log('quote', e.path[2].firstChild.innerText)
     }
   },
 }
