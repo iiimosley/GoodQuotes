@@ -6,7 +6,7 @@ The **SmartQuote** feature compiles all collected quotes by the user and process
 
 **Amazon Alexa Skill** was constructed in tandem with the Good Quotes API. The GoodQuotes Alexa skill will give you a random quote based on the user utterance of either a tag, author, or title matching the skills intent. [Repository](https://github.com/iiimosley/GoodQuotesAlexaSkill) for the skill.
 
-#### Deployed Location
+
 **Current deployment**: https://goodquotesapi.herokuapp.com/
 
 Basic access to API's webscraping features. No user features currently deployed.
